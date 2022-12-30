@@ -10,6 +10,11 @@ In the first commit:
 1. summoning_stat_calculations.py
 2. gene_class.py
 
+In the second commit:
+- changed gene_type_list to a global variable for clearer readability and to better fit DRY principle
+- added stats_genes_dictionary and visual_genes_dictionary which returns all translated genes data into a nice dictionary
+- fixed issue when calling _inital_stats_steps for visual genes
+
 Things to come:
 - Refined backend
 - Front end code
