@@ -89,6 +89,7 @@ class SummonStatistics:
                     child_stats_odds[hero_1_stat] += child_odds_final_step(hero_1_stat_pass_odds)
                     child_stats_odds[hero_2_stat] += child_odds_final_step(hero_2_stat_pass_odds)
 
+                    #if/else checks to see if the mutation stat is already in the child_mutation_odds dictionary and adds the key:value pair if not already present.
                     if child_stats_odds_mutation_stat_check:
                         child_stats_odds.update({child_mutation_stat:child_mutation_odds})
 
@@ -133,18 +134,17 @@ class SummonStatistics:
 
 
     def stats_genes_dictionary(self):
-        return {key:summon._initial_stats_step('genes_genes', key) for key in HeroGenetics.stat_keys}
+        return {key:self._initial_stats_step('stats_genes', key) for key in HeroGenetics.stat_keys}
 
 
     def visual_gene_dictionary(self):
-        return {key:summon._initial_stats_step('visual_genes', key) for key in HeroGenetics.visual_keys}
+        return {key:self._initial_stats_step('visual_genes', key) for key in HeroGenetics.visual_keys}
 
 
 
 
-
-summon = SummonStatistics(174708, 250575)
-child_stats_dict = summon.stats_genes_dictionary()
+#summon = SummonStatistics(174708, 250575)
+#child_stats_dict = summon.stats_genes_dictionary()
 #child_stats_dict = summon.visual_gene_dictionary()
 
-print(f'{child_stats_dict}')
+#print(f'{child_stats_dict}')
