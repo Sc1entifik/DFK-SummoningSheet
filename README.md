@@ -3,7 +3,7 @@
 The purpose of this project is to create a website that will provide you the summoning data for your hero and all the heros you could summon with that hero to get a side by side comparisson to find the best possible summon for that hero as opposed to only being able to see the data for one summon at a time.
 While the front end is not built yet the data can be written to .csv spreadsheets to very powerful effect. I
 
-In the first commit:
+v0.1:
 - README.md
 - Functional back end that can retrieve data needed from the api
 1. summoning_stat_calculations.py
@@ -22,11 +22,17 @@ In the third commit:
 	1. Created flask app controller file named app.py
 	2. Created html files for app.py to render and started styling those files 
 
+IV commit:
+- found and fixed bug in summoning_stat_calculations method which caused inaccurate stats when mutation stats would match on both heros on two or more consecutive gene levels
+
+
 Things to come:
 - Front end code
 	1. User input forms
 	2. Proper .css files to style sheets instead of .css imbeded in html
 	3. Sorting results by stats at the end user level.
+
+- Working on showing stats in the order I want without lots and lots of code.
 
 
 Things that may come:

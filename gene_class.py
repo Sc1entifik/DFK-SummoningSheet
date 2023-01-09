@@ -15,7 +15,7 @@ class HeroGenetics():
     #can call the api for any stat that is callable from the dfk-api if you wish to add more instance variables in the __init__ function for your project 
     def _api_call(self,var_name='statGenes'):
         query = '''{{
-        heroes(where: {{normalizedId:"{hero_id}"}}){{
+        heroes(where: {{id:"{hero_id}"}}){{
         normalizedId
         {var_name}
          }}

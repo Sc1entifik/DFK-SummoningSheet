@@ -33,7 +33,7 @@ class SummonStatistics:
         return {key:mutation_check(mutation_dictionary.get(hero_1_classes.get(key)),hero_2_classes.get(key)) for key in SummonStatistics.gene_type_list}
 
 
-    def _mutation_class_and_type(self, tple):
+    def _mutation_class_and_multiplier(self, tple):
         advanced_classes = ['Ninja', 'Summoner', 'Paladin', 'DarkKnight', 'Shapeshifter', 'Bard']
         elite_classes = ['Dragoon', 'Sage', 'Spell Bow']
         exalted_classes = ['DreadKnight']
@@ -68,35 +68,44 @@ class SummonStatistics:
                 hero_2_mutation_index = i
                 hero_1_stat_pass_odds = hero_1_value_dictionary.get(SummonStatistics.gene_type_list[hero_1_mutation_index])
                 hero_2_stat_pass_odds = hero_2_value_dictionary.get(SummonStatistics.gene_type_list[hero_2_mutation_index])
-                hero_1_stat = hero_1_stats.get(SummonStatistics.gene_type_list[hero_1_mutation_index])
-                hero_2_stat = hero_2_stats.get(SummonStatistics.gene_type_list[hero_2_mutation_index])
+                return_hero_1_and_hero_2_stat = lambda: (hero_1_stats.get(SummonStatistics.gene_type_list[hero_1_mutation_index]), hero_2_stats.get(SummonStatistics.gene_type_list[hero_2_mutation_index]))
+                iteration_bypass_hero_1_and_hero_2_stat = lambda: (hero_1_stats.get(SummonStatistics.gene_type_list[hero_1_mutation_index - 1]), hero_2_stats.get(SummonStatistics.gene_type_list[hero_2_mutation_index - 1]))
             
                 if mutability_dictionary.get(SummonStatistics.gene_type_list[i]) == True:
-
-                    while hero_1_stat_pass_odds == 0:
-                        hero_1_mutation_index -= 1
-                        hero_1_stat_pass_odds = hero_1_value_dictionary.get(SummonStatistics.gene_type_list[hero_1_mutation_index])
-
-                    while hero_2_stat_pass_odds == 0:
-                        hero_2_mutation_index -= 1
-                        hero_2_stat_pass_odds = hero_2_value_dictionary.get(SummonStatistics.gene_type_list[hero_2_mutation_index])
-                
-                    child_mutation_stat, child_mutation_multiplier = self._mutation_class_and_type((hero_1_stat,hero_2_stat))
-                    child_mutation_odds = hero_1_stat_pass_odds * hero_2_stat_pass_odds * child_mutation_multiplier
-                    hero_1_stat_pass_odds -= child_mutation_odds
-                    hero_2_stat_pass_odds -= child_mutation_odds
-                    child_stats_odds_mutation_stat_check = True if child_stats_odds.get(child_mutation_stat,False) == False else False
-                    child_stats_odds[hero_1_stat] += child_odds_final_step(hero_1_stat_pass_odds)
-                    child_stats_odds[hero_2_stat] += child_odds_final_step(hero_2_stat_pass_odds)
-
-                    #if/else checks to see if the mutation stat is already in the child_mutation_odds dictionary and adds the key:value pair if not already present.
-                    if child_stats_odds_mutation_stat_check:
-                        child_stats_odds.update({child_mutation_stat:child_mutation_odds})
+                    hero_1_stat, hero_2_stat = return_hero_1_and_hero_2_stat()
+                    bypass_h1, bypass_h2 = iteration_bypass_hero_1_and_hero_2_stat()
+                    
+                    #handles the rare occurance of both hero_1 stat and hero_2 stat matching mutation stat on two or more consecutive levels at the same time
+                    if hero_1_stat == bypass_h1 and hero_2_stat == bypass_h2:
+                        i -= 1
+                        continue
 
                     else:
-                        child_stats_odds[child_mutation_stat] += child_mutation_odds
+                        while hero_1_stat_pass_odds == 0:
+                            hero_1_mutation_index -= 1
+                            hero_1_stat_pass_odds = hero_1_value_dictionary.get(SummonStatistics.gene_type_list[hero_1_mutation_index])
+
+                        while hero_2_stat_pass_odds == 0:
+                            hero_2_mutation_index -= 1
+                            hero_2_stat_pass_odds = hero_2_value_dictionary.get(SummonStatistics.gene_type_list[hero_2_mutation_index])
+
+                        child_mutation_class, child_mutation_multiplier = self._mutation_class_and_multiplier((hero_1_stat, hero_2_stat))
+                        child_mutation_odds = hero_1_stat_pass_odds * hero_2_stat_pass_odds * child_mutation_multiplier
+                        hero_1_stat_pass_odds -= child_mutation_odds
+                        hero_2_stat_pass_odds -= child_mutation_odds
+                        child_stats_odds[hero_1_stat] += child_odds_final_step(hero_1_stat_pass_odds)
+                        child_stats_odds[hero_2_stat] += child_odds_final_step(hero_2_stat_pass_odds)
+                        child_stats_odds_mutation_stat_check = True if child_stats_odds.get(child_mutation_class,False) == False else False
+
+                        #if/else checks to see if the mutation stat is already in the child_mutation_odds dictionary and adds the key:value pair if not already present.
+                        if child_stats_odds_mutation_stat_check:
+                            child_stats_odds.update({child_mutation_class:child_mutation_odds})
+
+                        else:
+                            child_stats_odds[child_mutation_class] += child_mutation_odds
 
                 else:
+                    hero_1_stat, hero_2_stat = return_hero_1_and_hero_2_stat()
                     child_stats_odds[hero_1_stat] += child_odds_final_step(hero_1_stat_pass_odds)
                     child_stats_odds[hero_2_stat] += child_odds_final_step(hero_2_stat_pass_odds)
 
