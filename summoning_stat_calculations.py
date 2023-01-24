@@ -7,6 +7,8 @@ from gene_class import HeroGenetics
 
 class SummonStatistics:
     gene_type_list = ('dominant', 'recessive_1', 'recessive_2', 'recessive_3')
+    full_class_list = ('Warrior', 'Knight', 'Archer', 'Thief', 'Pirate', 'Monk', 'Wizard', 'Priest', 'Seer', 'Beserker', 'Scholar', 'Legionaire', 'Paladin', 'DarkKnight', 'Ninja', 'Summoner', 'Shapeshifter', 'Bard', 'SpellBow', 'Dragoon', 'Sage', 'DreadKnight')
+    #wanted_class_dictionary = self._wanted_class_dictionary() 
     
 
     def __init__(self, hero_1, hero_2):
@@ -15,7 +17,14 @@ class SummonStatistics:
         self.hero_1_visual_genes = HeroGenetics(hero_1).visual_gene_dictionary()
         self.hero_2_visual_genes = HeroGenetics(hero_2).visual_gene_dictionary()
         self._class_mutability_dictionary = {'main_class': self._is_mutatable('main_class'),'sub_class': self._is_mutatable('sub_class')}
+        self._profession_to_pass = self.hero_1_stats_genes.get('profession').get('dominant')
+        self._hero_1_class = self.hero_1_stats_genes.get('main_class').get('dominant')
         
+
+    def _wanted_class_dictionary(self):
+        wanted_class_list = (('Paladin', 'Warrior', 'Knight'), ('Paladin', 'Warrior', 'Knight'), ('DarkKnight', 'Archer', 'Thief'), ('DarkKnight', 'Archer', 'Thief'), ('Ninja', 'Pirate', 'Monk'), ('Ninja', 'Pirate', 'Monk'), ('Summoner', 'Wizard', 'Priest'), ('Summoner', 'Wizard', 'Priest'), ('Shapeshifter', 'Seer', 'Beserker'), ('Shapeshifter', 'Seer', 'Beserker'), ('Bard', 'Scholar', 'Legionaire'), ('Bard', 'Scholar', 'Legionaire'), ('Dragoon', 'Paladin', 'DarkKnight'), ('Dragoon', 'Paladin', 'DarkKnight'), ('Sage', 'Ninja', 'Summoner'), ('Sage', 'Ninja', 'Summoner'), ('SpellBow', 'Shapeshifter', 'Bard'), ('SpellBow', 'Shapeshifter', 'Bard'), ('SpellBow', 'Shapeshifter', 'Bard'), ('DreadKnight', 'Dragoon', 'Sage'), ('DreadKnight', 'Dragoon', 'Sage'), ('DreadKnight', 'Dragoon', 'Sage'))
+        return {key:value for key,value in zip(SummonStatistics.full_class_list,wanted_class_list)} 
+
 
     def _mutation_dictionary(self):
         mutatable_class_lists = [('Warrior','Knight'),('Archer','Thief'),('Pirate','Monk'),('Wizard','Priest'),('Seer','Beserker'),('Scholar','Legionaire'),('Paladin','DarkKnight'),('Ninja','Summoner'),('Shapeshifter','Bard'),('Dragoon','Sage')]
@@ -35,7 +44,7 @@ class SummonStatistics:
 
     def _mutation_class_and_multiplier(self, tple):
         advanced_classes = ['Ninja', 'Summoner', 'Paladin', 'DarkKnight', 'Shapeshifter', 'Bard']
-        elite_classes = ['Dragoon', 'Sage', 'Spell Bow']
+        elite_classes = ['Dragoon', 'Sage', 'SpellBow']
         exalted_classes = ['DreadKnight']
         keys_list = advanced_classes + elite_classes + exalted_classes
         summon_combinators = [('Monk', 'Pirate'), ('Priest', 'Wizard'), ('Warrior', 'Knight'), ('Thief', 'Archer'), ('Seer', 'Beserker'), ('Scholar', 'Legionaire'), ('Paladin', 'DarkKnight'), ('Ninja', 'Summoner'), ('Shapeshifter', 'Bard'), ('Dragoon', 'Sage')]
@@ -148,6 +157,10 @@ class SummonStatistics:
 
     def visual_gene_dictionary(self):
         return {key:self._initial_stats_step('visual_genes', key) for key in HeroGenetics.visual_keys}
+    
+
+    def wanted_profession_and_hero_1_class(self):
+        return self._profession_to_pass, self._hero_1_class
 
 
 
@@ -155,5 +168,5 @@ class SummonStatistics:
 #summon = SummonStatistics(174708, 250575)
 #child_stats_dict = summon.stats_genes_dictionary()
 #child_stats_dict = summon.visual_gene_dictionary()
-
+#child_stats_dict = summon._wanted_class_dictionary()
 #print(f'{child_stats_dict}')

@@ -16,7 +16,7 @@
 	.content-table thead tr {
 		background-color: #009879;
 		color: #ffffff;
-		text-align: left;
+		text-align: center;
 		font-weight: bold;
 	}
 	
@@ -41,21 +41,25 @@
 <table class='content-table'>
 	<thead>
 		<tr>
-		{%for key in stats_keys %}
-		{% for stat in stats_keys_dictionary.get(key)%}
-			<th>{{stat}}</th>
-		{% endfor %}
+		{% for column in table_header %}
+		<th colspan = "{{header_span.get(column)}}">{{column}}</th>
 		{% endfor %}
 		</tr>
+		<tr>
+			{% for header in table_subheader %}
+				<th colspan = "1">{{header}}</th>
+			{% endfor %}
+		</tr
 	</thead>
 	<tbody>
+			{% for row in table_rows %}
 		<tr>
-		{%for key in stats_keys %}
-		{% for stat in stats_keys_dictionary.get(key)%}
-			<td>{{child_dict.get(key).get(stat,0)}}</td>
-		{% endfor %}
-		{% endfor %}
+			{% for item in row %}
+			<td>{{item}}</td>
+			{% endfor %}
+
 		</tr>
+			{% endfor %}
 	</tbody>
 </table>
 {% endblock %}

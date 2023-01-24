@@ -23,7 +23,9 @@ In the third commit:
 	2. Created html files for app.py to render and started styling those files 
 
 IV commit:
-- found and fixed bug in summoning_stat_calculations method which caused inaccurate stats when mutation stats would match on both heros on two or more consecutive gene levels
+- found and fixed bug in summoning_stat_calculations.py _remaining_stats_step method which caused inaccurate stats when mutation stats would match on both heros on two or more consecutive gene levels
+- changed api_pull method in gene_class.py to use id stat instead of normalizedId stat. Which fixed an issue when calling the method with a Crystalvale or Serendale 2.0 prefix added to the hero number
+
 
 
 Things to come:
@@ -33,6 +35,7 @@ Things to come:
 	3. Sorting results by stats at the end user level.
 
 - Working on showing stats in the order I want without lots and lots of code.
+	1. Still working with test file in order to enter all hero queries and get returned all stats to display in an order I would like to see it.
 
 
 Things that may come:
