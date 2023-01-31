@@ -21,11 +21,6 @@ class SummonStatistics:
         self._hero_1_class = self.hero_1_stats_genes.get('main_class').get('dominant')
         
 
-    def _wanted_class_dictionary(self):
-        wanted_class_list = (('Paladin', 'Warrior', 'Knight'), ('Paladin', 'Warrior', 'Knight'), ('DarkKnight', 'Archer', 'Thief'), ('DarkKnight', 'Archer', 'Thief'), ('Ninja', 'Pirate', 'Monk'), ('Ninja', 'Pirate', 'Monk'), ('Summoner', 'Wizard', 'Priest'), ('Summoner', 'Wizard', 'Priest'), ('Shapeshifter', 'Seer', 'Beserker'), ('Shapeshifter', 'Seer', 'Beserker'), ('Bard', 'Scholar', 'Legionaire'), ('Bard', 'Scholar', 'Legionaire'), ('Dragoon', 'Paladin', 'DarkKnight'), ('Dragoon', 'Paladin', 'DarkKnight'), ('Sage', 'Ninja', 'Summoner'), ('Sage', 'Ninja', 'Summoner'), ('SpellBow', 'Shapeshifter', 'Bard'), ('SpellBow', 'Shapeshifter', 'Bard'), ('SpellBow', 'Shapeshifter', 'Bard'), ('DreadKnight', 'Dragoon', 'Sage'), ('DreadKnight', 'Dragoon', 'Sage'), ('DreadKnight', 'Dragoon', 'Sage'))
-        return {key:value for key,value in zip(SummonStatistics.full_class_list,wanted_class_list)} 
-
-
     def _mutation_dictionary(self):
         mutatable_class_lists = [('Warrior','Knight'),('Archer','Thief'),('Pirate','Monk'),('Wizard','Priest'),('Seer','Beserker'),('Scholar','Legionaire'),('Paladin','DarkKnight'),('Ninja','Summoner'),('Shapeshifter','Bard'),('Dragoon','Sage')]
         final_list = mutatable_class_lists + [reversed(lst) for lst in mutatable_class_lists]
@@ -168,5 +163,5 @@ class SummonStatistics:
 #summon = SummonStatistics(174708, 250575)
 #child_stats_dict = summon.stats_genes_dictionary()
 #child_stats_dict = summon.visual_gene_dictionary()
-#child_stats_dict = summon._wanted_class_dictionary()
+#child_stats_dict = summon.wanted_profession_and_hero_1_class()
 #print(f'{child_stats_dict}')

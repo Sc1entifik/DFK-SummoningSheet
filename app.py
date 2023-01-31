@@ -1,25 +1,31 @@
 from flask import Flask, render_template
+from forms import HeroInputForm
 import requests
 from summoning_stat_calculations import SummonStatistics
 
 app = Flask(__name__)
+app.secret_key = 'ieropajdklsagnfjklghrkjlffjdklasfjkdsa;'
 
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 def home():
+    form = HeroInputForm()
+    if form.validate_on_submit():
+        return start_sheet(form)
     return render_template('index.html')
 
 
 @app.route('/start_sheet/')
-def start_sheet():
-    your_hero = 174708
-    sd_1_candidate_list = (250575,)
-    sd_2_candidate_list = tuple()
-    cv_candidate_list = (113331, 62414, 53627, 38688)
+def start_sheet(form):
+    sd_1_candidate_list = form.sd_candidate_list.data.split()
+    sd_2_candidate_list = form.sd_2_candidate_list.data.split()
+    cv_candidate_list = form.cv_candidate_list.data.split()
     one_minus = lambda *x: 1 - sum(x)
     
 
-    def return_hero_number_prefix(hero_num):
-        prefix = '1' if hero_num in cv_candidate_list else '2'
+    def return_hero_number_prefix(hero_num, yours = False):
+        your_hero_prefix = '1' if form.your_hero_realm.data == 'Crystalvale' else '2'
+        candidate_hero_prefix = '1' if hero_num in cv_candidate_list else '2'
+        prefix = your_hero_prefix if yours == True else candidate_hero_prefix 
         padding = '0'
         
         while len(prefix + padding + str(hero_num)) < 13:
@@ -28,7 +34,8 @@ def start_sheet():
         return int(prefix + padding + str(hero_num))
     
 
-    final_list = (sd_1_candidate_list + tuple(map(return_hero_number_prefix,cv_candidate_list)) + tuple(map(return_hero_number_prefix, sd_2_candidate_list)))
+    your_hero = form.your_hero.data if form.your_hero_realm.data == 'Serendale' else return_hero_number_prefix(form.your_hero.data, yours = True)
+    final_list = (tuple(sd_1_candidate_list) + tuple(map(return_hero_number_prefix,cv_candidate_list)) + tuple(map(return_hero_number_prefix, sd_2_candidate_list)))
     normalized_ids = (sd_1_candidate_list + cv_candidate_list + sd_2_candidate_list)
     character_stats = ('Strength', 'Agility', 'Intelligence', 'Wisdom', 'Luck', 'Vitality', 'Endurance', 'Dexterity')
     summon_odds_list = [SummonStatistics(your_hero, candidate).stats_genes_dictionary() for candidate in final_list]
@@ -43,7 +50,6 @@ def start_sheet():
     header_span_list = (1,4,2,3,3,3,3,1)
     header_span_dict = {key:value for key,value in zip(table_header, header_span_list)}
     stat_keys = ('hero_num', 'profession', 'purple_stat_boost', 'stat_boost2', 'stat_boost1', 'main_class')
-    character_class = ("Warrior", "Knight", "Thief", "Archer", "Priest", "Wizard", "Monk", "Pirate", "Berserker", "Seer", "Legionnaire", "Scholar", "Paladin", "DarkKnight", "Summoner", "Ninja", "Shapeshifter", "Bard", "Dragoon", "Sage", "SpellBow", "DreadKnight")
     wanted_stats_by_profession = {'Mining': ('Strength','Endurance'), 'Fishing': ('Agility', 'Luck'), 'Foraging': ('Dexterity', 'Intelligence'), 'Gardening': ('Wisdom', 'Vitality')}
     wanted_stat_1, wanted_stat_2 = wanted_stats_by_profession.get(wanted_profession)
     profession_order_by_wanted_profession = {'Mining': ('Mining', 'Foraging', 'Fishing', 'Gardening'), 'Foraging': ('Foraging', 'Gardening', 'Fishing', 'Mining'), 'Fishing': ('Fishing', 'Mining', 'Foraging', 'Gardening'), 'Gardening': ('Gardening', 'Foraging', 'Fishing', 'Mining')}
@@ -56,13 +62,18 @@ def start_sheet():
     pre_class_table_rows = tuple((row.get('hero_num'), row.get('profession').get(desired_profession), row.get('profession').get(second_choice, 0), row.get('profession').get(whiffed_profession, 0), row.get('profession').get(worst_profession, 0), row.get('purple_stat_boost').get(wanted_stat_1, 0), row.get('purple_stat_boost').get(wanted_stat_2, 0), row.get('stat_boost2').get(wanted_stat_1, 0), row.get('stat_boost2').get(wanted_stat_2, 0), one_minus(row.get('stat_boost2').get(wanted_stat_1, 0), row.get('stat_boost2').get(wanted_stat_2, 0)) , row.get('stat_boost1').get(wanted_stat_1, 0), row.get('stat_boost1').get(wanted_stat_2, 0), one_minus(row.get('stat_boost1').get(wanted_stat_1, 0), row.get('stat_boost1').get(wanted_stat_2, 0))) for row in table_row_dict_list)
     post_class_table_rows = tuple(tuple(1 - sum(tuple(row.get('main_class').get(hero_type, 0) for hero_type in hero_classes_list if hero_type != 'Other')) if hero_class == 'Other' else row.get('main_class').get(hero_class, 0) for hero_class in hero_classes_list) for row in table_row_dict_list)
     table_rows = (pre_class_list + post_class_list for pre_class_list, post_class_list in zip(pre_class_table_rows, post_class_table_rows))
-
     return render_template('start_sheet.html', table_rows = table_rows, table_header = table_header, header_span = header_span_dict, table_subheader = table_subheader)
+        
+        
+@app.route('/hero_form/')
+def hero_form():
+    form = HeroInputForm()
+    return render_template('hero_form.html', form = form)
 
 
-app.route('/about/')
+@app.route('/about/')
 def about():
     return render_template('about.html')
 
 
-app.run()
+app.run(debug = True)
