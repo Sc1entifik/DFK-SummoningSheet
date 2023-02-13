@@ -10,6 +10,7 @@ class HeroGenetics():
         self.hero_id = hero_id
         self.hero_stat_gene_sequence = int(self._api_call())
         self.hero_visual_gene_sequence = int(self._api_call('visualGenes'))
+        self._hero_rarity = int(self._api_call('rarity'))
 
 
     #can call the api for any stat that is callable from the dfk-api if you wish to add more instance variables in the __init__ function for your project 
@@ -102,3 +103,9 @@ class HeroGenetics():
 
     def visual_gene_dictionary(self):
         return self._decoded_gene_dictionary('visual_genes')
+
+
+    def hero_rarity(self):
+        return self._hero_rarity
+
+

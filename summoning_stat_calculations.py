@@ -7,15 +7,16 @@ from gene_class import HeroGenetics
 
 class SummonStatistics:
     gene_type_list = ('dominant', 'recessive_1', 'recessive_2', 'recessive_3')
-    full_class_list = ('Warrior', 'Knight', 'Archer', 'Thief', 'Pirate', 'Monk', 'Wizard', 'Priest', 'Seer', 'Beserker', 'Scholar', 'Legionaire', 'Paladin', 'DarkKnight', 'Ninja', 'Summoner', 'Shapeshifter', 'Bard', 'SpellBow', 'Dragoon', 'Sage', 'DreadKnight')
-    #wanted_class_dictionary = self._wanted_class_dictionary() 
+    full_class_list = ('Warrior', 'Knight', 'Archer', 'Thief', 'Pirate', 'Monk', 'Wizard', 'Priest', 'Seer', 'Beserker', 'Scholar', 'Legionaire', 'Paladin', 'DarkKnight', 'Ninja', 'Summoner', 'Shapeshifter', 'Bard', 'SpellBow',  'Elite_4', 'Dragoon', 'Sage', 'DreadKnight', 'Exalted_2')
     
 
     def __init__(self, hero_1, hero_2):
-        self.hero_1_stats_genes = HeroGenetics(hero_1).stats_gene_dictionary()
-        self.hero_2_stats_genes = HeroGenetics(hero_2).stats_gene_dictionary()
-        self.hero_1_visual_genes = HeroGenetics(hero_1).visual_gene_dictionary()
-        self.hero_2_visual_genes = HeroGenetics(hero_2).visual_gene_dictionary()
+        self._hero_1_genetics = HeroGenetics(hero_1)
+        self._hero_2_genetics = HeroGenetics(hero_2)
+        self.hero_1_stats_genes = self._hero_1_genetics.stats_gene_dictionary()
+        self.hero_2_stats_genes = self._hero_2_genetics.stats_gene_dictionary()
+        self.hero_1_visual_genes = self._hero_1_genetics.visual_gene_dictionary()
+        self.hero_2_visual_genes = self._hero_2_genetics.visual_gene_dictionary()
         self._class_mutability_dictionary = {'main_class': self._is_mutatable('main_class'),'sub_class': self._is_mutatable('sub_class')}
         self._profession_to_pass = self.hero_1_stats_genes.get('profession').get('dominant')
         self._hero_1_class = self.hero_1_stats_genes.get('main_class').get('dominant')
@@ -158,10 +159,24 @@ class SummonStatistics:
         return self._profession_to_pass, self._hero_1_class
 
 
+    def summon_rarity_odds(self):
+        def odds_dict(lst):
+            common, uncommon, rare, legendary, mythic = lst
+            return {'common': common, 'uncommon': uncommon, 'rare': rare, 'legendary': legendary, 'mythic': mythic}
 
 
-#summon = SummonStatistics(174708, 250575)
+        two_num_average = lambda x: (x[0]+x[1]) * .5
+        rarity_odds = {0: (58.3, 27, 12.5, 2, .2), 1: (53.725, 28.375, 13.75, 3.125, 1.25), 2: (49.15, 29.75, 15, 4.25, 1.85), 3: (44.575, 31.125, 16.25, 5.375, 2.675), 4: (40, 32.5, 17.5, 6.5, 3.5)}
+        hero_1_rarity = self._hero_1_genetics.hero_rarity()
+        hero_2_rarity = self._hero_2_genetics.hero_rarity()
+        summon_rarity_odds = odds_dict(rarity_odds.get(hero_1_rarity)) if hero_1_rarity == hero_2_rarity else odds_dict(tuple(map(two_num_average, zip(rarity_odds.get(hero_1_rarity), rarity_odds.get(hero_2_rarity)))))
+        return summon_rarity_odds
+
+
+
+#summon = SummonStatistics(233667, 47307) 
 #child_stats_dict = summon.stats_genes_dictionary()
 #child_stats_dict = summon.visual_gene_dictionary()
 #child_stats_dict = summon.wanted_profession_and_hero_1_class()
+#child_stats_dict = summon.summon_rarity_odds()
 #print(f'{child_stats_dict}')

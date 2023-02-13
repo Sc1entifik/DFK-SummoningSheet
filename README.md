@@ -40,6 +40,18 @@ v-0.55
 - Modified inner function hero_number_prefix inside of start_sheet function in app.py to be callable while passing the your_hero variable to it as well as being able to make a map object with the hero_candidate lists.
 - Modified start_sheet in app.py to get the your_hero, cv_candidates_list, sd_candidate_list, and sd_2candidate_list to accept user inputs from web forms instead of preset values.
 
+v-0.75
+- Added input forms on hero_form.html for summoning costs.
+- Added rarity odds data for summoned heroes.
+- Found and fixed bug which caused most purple stat data to return 0.
+- Made small improvements to headers to be displayed by start_sheet.html
+- Removed unnecessary lines of code found in gene_class.py
+- Cleaned up app.py making it easier to read and easier to maintain.
+- Added controller class to handle data and prepare it for display.
+	1. Created controller.py
+
+
+
 Things to come:
 - Front end code
 	
