@@ -8,10 +8,10 @@ class HeroInputForm(FlaskForm):
     your_hero_summon_cost = StringField('Your Hero Summon Cost')
 
     sd_candidate_list = TextAreaField('Serendale Candidates')
-    sd_summon_cost = TextAreaField('Serendale Candidate Hero Summon Cost')
+    sd_summon_cost = TextAreaField('SD Candidate Hero Summon Cost + Hire Price')
     
     sd_2_candidate_list = TextAreaField('Serendale 2 Candidates')
     sd_2_summon_cost = TextAreaField('SD 2 Candidate Hero Summon Cost + Hire Price')
 
     cv_candidate_list = TextAreaField('Crystalvale Candidates')
-    cv_summon_cost = TextAreaField('Crystalvale Hero Summon Cost + Hire Price')
+    cv_summon_cost = TextAreaField('CV Hero Summon Cost + Hire Price')

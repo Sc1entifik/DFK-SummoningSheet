@@ -50,6 +50,9 @@ v-0.75
 - Added controller class to handle data and prepare it for display.
 	1. Created controller.py
 
+v-0.78
+- Styled website with css styling sheet.
+- Added Medieval style font to match website theme
 
 
 Things to come:
