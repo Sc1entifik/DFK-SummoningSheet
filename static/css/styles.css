@@ -40,7 +40,7 @@ html {
 
 .content-table thead tr {
 	background-color: maroon;
-	color: orange;
+	color: gold;
 	text-align: center;
 	font-weight: bold;
 	font-size: 1.2em;
@@ -61,6 +61,53 @@ html {
 
 .content-table tbody tr:last-of-type {
 	border-bottom: 2px solid #009879;
+}
+
+.description {
+	font-family: 'MedievalSharp';
+	font-size: 22px;
+	font-style: bold;
+	text-align: center;
+}
+
+.main_page_link {
+	font-family: 'MedievalSharp';
+	text-align: center;
+	font-size: 27px;
+	font-weight: 400;
+	padding: 9px;
+}
+
+.instructions {
+	font-family: 'MedievalSharp';
+	font-size: 17px;
+	font-weight: 600;
+	padding: 2px;
+	line-height: 25px;
+	color: maroon;
+}
+
+.homepage_link {
+	font-family: 'MedievalSharp';
+	font-size: 22px;
+	text-align: center;
+	color: green;
+}
+
+.failure_list_center {
+	text-align: center;
+
+}
+
+.failure_list_left_align {
+	display: inline-block;
+	text-align: left;
+}
+
+.failure_list {
+	font-family: 'MedievalSharp';
+	font-size 14px;
+	color black;
 }
 
 
@@ -95,6 +142,18 @@ h3 {
 	text-align: center;
 } 
 
+h4 {
+	padding: 4px;
+	font-family: 'MedievalSharp';
+	font-size: 30px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 700;
+	line-height: 15.4px;
+	text-align: left;
+	color: maroon;
+}
+
 p { 
 	font-family: 'MedievalSharp'; 
 	font-size: 14px; 
@@ -103,40 +162,6 @@ p {
 	font-weight: 400; 
 	line-height: 20px; 
 } 
-
-.description {
-	font-family: 'MedievalSharp';
-	font-size: 22px;
-	font-style: bold;
-	text-align: center;
-
-}
-
-blockquote { 
-	font-family: 'MedievalSharp'; 
-	font-size: 21px; 
-	font-style: normal; 
-	font-variant: normal; 
-	font-weight: 400; 
-	line-height: 30px; 
-} 
-
-pre { 
-	font-family: 'MedievalSharp'; 
-	font-size: 13px; 
-	font-style: normal; 
-	font-variant: normal; 
-	font-weight: 400; 
-	line-height: 18.5714px; 
-}
-
-.main_page_link {
-	font-family: 'MedievalSharp';
-	text-align: center;
-	font-size: 27px;
-	font-weight: 400;
-	padding: 9px;
-}
 
 footer {
 	font-weight: 400;

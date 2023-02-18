@@ -54,14 +54,13 @@ v-0.78
 - Styled website with css styling sheet.
 - Added Medieval style font to match website theme
 
+v-1.0
+- Finished styling website
+- Added error handling for web forms filled out incorrectly.
+
 
 Things to come:
 - Front end code
-	
-	1. Proper .css files to style sheets instead of .css imbeded in html
-	2. Sorting results by stats at the end user level.
-
-- Working on showing stats in the order I want without lots and lots of code.
-	1. This was achieved however it took more code than I would have liked it to. I'm considering refactoring this but am not quite sure where to segment the code to. 
+	1. Sorting results by stats at the end user level.
 
 

@@ -166,7 +166,7 @@ class SummonStatistics:
 
 
         two_num_average = lambda x: (x[0]+x[1]) * .5
-        rarity_odds = {0: (58.3, 27, 12.5, 2, .2), 1: (53.725, 28.375, 13.75, 3.125, 1.25), 2: (49.15, 29.75, 15, 4.25, 1.85), 3: (44.575, 31.125, 16.25, 5.375, 2.675), 4: (40, 32.5, 17.5, 6.5, 3.5)}
+        rarity_odds = {0: (.583, .27, .125, .02, .002), 1: (.53725, .28375, .1375, .03125, .0125), 2: (.4915, .2975, .15, .0425, .0185), 3: (.44575, .31125, .1625, .05375, .02675), 4: (.40, .325, .175, .065, .035)}
         hero_1_rarity = self._hero_1_genetics.hero_rarity()
         hero_2_rarity = self._hero_2_genetics.hero_rarity()
         summon_rarity_odds = odds_dict(rarity_odds.get(hero_1_rarity)) if hero_1_rarity == hero_2_rarity else odds_dict(tuple(map(two_num_average, zip(rarity_odds.get(hero_1_rarity), rarity_odds.get(hero_2_rarity)))))

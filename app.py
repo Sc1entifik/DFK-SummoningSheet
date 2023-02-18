@@ -30,6 +30,11 @@ def about():
     return render_template('about.html')
 
 
+@app.errorhandler(Exception)
+def failure_form(e):
+    return render_template('failure.html')
+
+
 app.run(debug=True)
 
 
