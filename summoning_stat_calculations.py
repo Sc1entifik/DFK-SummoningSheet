@@ -1,13 +1,8 @@
-'''
-1) work on getting rarity stats
-2) move onto front end
-'''
-
 from gene_class import HeroGenetics
 
 class SummonStatistics:
     gene_type_list = ('dominant', 'recessive_1', 'recessive_2', 'recessive_3')
-    full_class_list = ('Warrior', 'Knight', 'Archer', 'Thief', 'Pirate', 'Monk', 'Wizard', 'Priest', 'Seer', 'Beserker', 'Scholar', 'Legionaire', 'Paladin', 'DarkKnight', 'Ninja', 'Summoner', 'Shapeshifter', 'Bard', 'SpellBow',  'Elite_4', 'Dragoon', 'Sage', 'DreadKnight', 'Exalted_2')
+    full_class_list = ('Warrior', 'Knight', 'Archer', 'Thief', 'Pirate', 'Monk', 'Wizard', 'Priest', 'Seer', 'Beserker', 'Scholar', 'Legionnaire', 'Paladin', 'DarkKnight', 'Ninja', 'Summoner', 'Shapeshifter', 'Bard', 'SpellBow',  'Elite_4', 'Dragoon', 'Sage', 'DreadKnight', 'Exalted_2')
     
 
     def __init__(self, hero_1, hero_2):
@@ -23,7 +18,7 @@ class SummonStatistics:
         
 
     def _mutation_dictionary(self):
-        mutatable_class_lists = [('Warrior','Knight'),('Archer','Thief'),('Pirate','Monk'),('Wizard','Priest'),('Seer','Beserker'),('Scholar','Legionaire'),('Paladin','DarkKnight'),('Ninja','Summoner'),('Shapeshifter','Bard'),('Dragoon','Sage')]
+        mutatable_class_lists = [('Warrior','Knight'),('Archer','Thief'),('Pirate','Monk'),('Wizard','Priest'),('Seer','Beserker'),('Scholar','Legionnaire'),('Paladin','DarkKnight'),('Ninja','Summoner'),('Shapeshifter','Bard'),('Dragoon','Sage')]
         final_list = mutatable_class_lists + [reversed(lst) for lst in mutatable_class_lists]
         return {key:value for key,value in final_list}
 
@@ -43,7 +38,7 @@ class SummonStatistics:
         elite_classes = ['Dragoon', 'Sage', 'SpellBow']
         exalted_classes = ['DreadKnight']
         keys_list = advanced_classes + elite_classes + exalted_classes
-        summon_combinators = [('Monk', 'Pirate'), ('Priest', 'Wizard'), ('Warrior', 'Knight'), ('Thief', 'Archer'), ('Seer', 'Beserker'), ('Scholar', 'Legionaire'), ('Paladin', 'DarkKnight'), ('Ninja', 'Summoner'), ('Shapeshifter', 'Bard'), ('Dragoon', 'Sage')]
+        summon_combinators = [('Monk', 'Pirate'), ('Priest', 'Wizard'), ('Warrior', 'Knight'), ('Thief', 'Archer'), ('Seer', 'Beserker'), ('Scholar', 'Legionnaire'), ('Paladin', 'DarkKnight'), ('Ninja', 'Summoner'), ('Shapeshifter', 'Bard'), ('Dragoon', 'Sage')]
         reversed_combinators = [tuple(reversed(item)) for item in summon_combinators]
         mutation_class_dictionary = {key:value for key,value in zip(keys_list,zip(summon_combinators,reversed_combinators))}
         mutation_multiplier = None
@@ -174,7 +169,7 @@ class SummonStatistics:
 
 
 
-#summon = SummonStatistics(233667, 47307) 
+#summon = SummonStatistics(2000000014834, 1000000149421) 
 #child_stats_dict = summon.stats_genes_dictionary()
 #child_stats_dict = summon.visual_gene_dictionary()
 #child_stats_dict = summon.wanted_profession_and_hero_1_class()

@@ -119,4 +119,3 @@ class StatsController:
 
         return(table_header, header_span_dict, table_subheader, table_rows)
              
-        

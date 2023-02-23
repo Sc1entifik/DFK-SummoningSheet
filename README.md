@@ -58,6 +58,11 @@ v-1.0
 - Finished styling website
 - Added error handling for web forms filled out incorrectly.
 
+v-1.1
+- Made changes to no longer commit venv files after finding out they were not necessary
+- Added Dockerfile to create a Docker image file for easier deployment.
+- Found and fixed bug causing an error when looking up Legionnaire heroes.
+
 
 Things to come:
 - Front end code
