@@ -63,6 +63,8 @@ v-1.1
 - Added Dockerfile to create a Docker image file for easier deployment.
 - Found and fixed bug causing an error when looking up Legionnaire heroes.
 
+v-1.25
+-Found and fixed bug when searching for heroes with the Fishing profession
 
 Things to come:
 - Front end code

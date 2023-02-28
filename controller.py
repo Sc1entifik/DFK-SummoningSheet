@@ -15,7 +15,7 @@ def return_class_header_dictionary():
 class StatsController:
     wanted_classes_dictionary = return_class_header_dictionary()
     wanted_stats_dictionary = {'Mining': ('Strength', 'Endurance'), 'Fishing': ('Agility', 'Luck'), 'Foraging': ('Dexterity', 'Intelligence'), 'Gardening': ('Wisdom', 'Vitality')}
-    profession_order_dictionary = {'Mining': ('Mining', 'Foraging', 'Fishing', 'Gardening'), 'Foraging': ('Foraging', 'Gardening', 'Fishing', 'Mining'), 'Gardening': ('Gardening', 'Foraging', 'Fishing', 'Mining')}
+    profession_order_dictionary = {'Mining': ('Mining', 'Foraging', 'Fishing', 'Gardening'), 'Foraging': ('Foraging', 'Gardening', 'Fishing', 'Mining'), 'Gardening': ('Gardening', 'Foraging', 'Fishing', 'Mining'),'Fishing': ('Fishing','Mining','Foraging','Gardening')}
     other_stats_or_classes = ('Other',)
     summon_rarity = ('common', 'uncommon', 'rare', 'legendary', 'mythic')
     character_stats = ('Strength', 'Agility', 'Intelligence', 'Wisdom', 'Luck', 'Vitality', 'Endurance', 'Dexterity')
