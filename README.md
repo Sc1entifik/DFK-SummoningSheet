@@ -64,7 +64,10 @@ v-1.1
 - Found and fixed bug causing an error when looking up Legionnaire heroes.
 
 v-1.25
--Found and fixed bug when searching for heroes with the Fishing profession
+- Found and fixed bug when searching for heroes with the Fishing profession
+
+v-1.30
+- Found and fixed bug when searching for Berserker class heroes
 
 Things to come:
 - Front end code

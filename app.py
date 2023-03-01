@@ -29,11 +29,11 @@ def hero_form():
 def about():
     return render_template('about.html')
 
-
+'''
 @app.errorhandler(Exception)
 def failure_form(e):
     return render_template('failure.html')
-
+'''
 
 
 if __name__== "__main__":
