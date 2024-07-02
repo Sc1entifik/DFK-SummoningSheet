@@ -1,52 +1,69 @@
 import requests
 import json
+from datetime import datetime as dt
 
-class DexScreenerPrices:
-    PAIR_ADDRESS_FILEPATH = "pair_addresses.json"
+class DexscreenerStaticValues:
+    DEXSCREENER_DATABASE_FILEPATH = "dexscreener_dfk_mats_prices.json"
     CHAIN_ID = "avalanchedfk"
+    DATABASE_DATETIME_FORMAT = "%Y/%m/%d %H:%M"
     ITEM_QUERY_ENDPOINT = "https://api.dexscreener.com/latest/dex/search?q="
     MULTIPLE_ITEM_ENDPOINT = f"https://api.dexscreener.io/latest/dex/pairs/{CHAIN_ID}/"
     FISH_LIST = ("dfkbloater", "dfkironscale", "dfklanterneye", "dfkredgill", "dfksilverfin", "dfksailfish", "dfkfbloater", "dfkspckltl", "dfkthreel", "dfkkingpncr")
     PLANT_LIST= ("dfkrgwd", "dfkrckrt", "dfkrdlf", "dfkdrkwd", "dfkambrtfy", "dfkgldvn", "dfkswfthsl", "dfkfrostdrm", "dfkknaproot", "dfkdrkwd", "dfkshagcap", "dfksknshade", "dfkbluestem", "dfkspidrfrt", "dfkmilkweed")
     STONES_LIST = ("dfkshvas", "dfkmoksha", "dfklmghtcr", "dfklswftcr", "dfklfrticr", "dfklinscr", "dfklvgrcr", "dfklwitcr", "dfklfrtucr")
-    TEARS_AND_EGGS_LIST = ("dfktears", "dfktears", "dfkblueegg", "dfkgregg", "dfkgreenegg", "dfkyelowegg", "dfkgoldegg")
+    TEARS_AND_EGGS_LIST = ("dfktears", "dfkblueegg", "dfkgregg", "dfkgreenegg", "dfkyelowegg", "dfkgoldegg")
     CURRENCIES = ("dfkgold", "klay")
     
 
-    def _get_pair_address(self, query_item):
-        dexscreener_object = requests.get(DexScreenerPrices.ITEM_QUERY_ENDPOINT + query_item).json().get("pairs")
-
-        return dexscreener_object[0].get("pairAddress") if dexscreener_object else "0x4a17077F000FB66162BA6067Dc7f5f844F140DEe" #Ternary statement handles bug where dfkredgill is sometimes not found at dexscreener. 0x address is the 0x pair address for redgill.
-
-
-    def write_pair_addresses_json(self):
-        full_item_list = DexScreenerPrices.FISH_LIST + DexScreenerPrices.PLANT_LIST + DexScreenerPrices.STONES_LIST + DexScreenerPrices.TEARS_AND_EGGS_LIST + DexScreenerPrices.CURRENCIES
-        pair_addresses = map(self._get_pair_address, full_item_list) 
-
-        with open(DexScreenerPrices.PAIR_ADDRESS_FILEPATH, "w") as pairs:
-            json.dump({key:value for key, value in zip(full_item_list, pair_addresses)}, pairs)
+class InitializeDexscreenerJsonDatabase(DexscreenerStaticValues):
+    
+    def _update_single_database_entry(self, query_item):
+        dexscreener_object = requests.get(DexscreenerDatabaseManager.ITEM_QUERY_ENDPOINT + query_item).json().get("pairs") 
         
+        for item in dexscreener_object:
+            if item.get("chainId") == DexscreenerDatabaseManager.CHAIN_ID:
+
+                return {"pair_address":item.get("pairAddress"), "price_native":item.get("priceNative"), "updated_at_last_update":True} 
+    
+
+    def initialize_dexscreener_dfk_mats_prices_json(self):
+        full_item_list = DexscreenerDatabaseManager.FISH_LIST + DexscreenerDatabaseManager.PLANT_LIST + DexscreenerDatabaseManager.STONES_LIST + DexscreenerDatabaseManager.TEARS_AND_EGGS_LIST + DexscreenerDatabaseManager.CURRENCIES
+        initial_database = map(self._update_single_database_entry, full_item_list) 
+
+        with open(DexscreenerDatabaseManager.DEXSCREENER_DATABASE_FILEPATH, "w") as dexscreener_database:
+            json.dump({key:value for key, value in zip(full_item_list, initial_database)} | {"last_updated": dt.now().strftime(DexscreenerDatabaseManager.DATABASE_DATETIME_FORMAT)}, dexscreener_database)
+    
+
+class DexscreenerDatabaseManager(DexscreenerStaticValues): 
+    def __init__(self):
+        self.dexscreener_dfk_mats_dictionary = self._load_dexscreener_dictionary()
+
+
+    def _load_dexscreener_dictionary(self):
+        with open(DexscreenerDatabaseManager.DEXSCREENER_DATABASE_FILEPATH) as dexscreener_database:
+            dexscreenner_dictionary = json.load(dexscreener_database)
         
-    def wjewel_discovery_price_dictionary(self):
-        wjewel_discovery_prices = lambda mats_list, endpoint: {key:value.get("priceNative") for key, value in zip(mats_list, requests.get(endpoint).json().get("pairs"))}
+        return dexscreenner_dictionary
 
-        with open(DexScreenerPrices.PAIR_ADDRESS_FILEPATH) as fp:
-            pair_addresses_dictionary = json.load(fp)
+        
+    def _return_updated_database(self):
+        update_database_entries = lambda endpoint: {entry.get("baseToken").get("symbol").lower():entry for entry in requests.get(endpoint).json().get("pairs")}
+        pair_address_dictionary  = lambda mats_list: {mat:self.dexscreener_dfk_mats_dictionary.get(mat).get("pair_address") for mat in mats_list }
+        multiple_item_endpoint = lambda pair_address_dictionary: DexscreenerDatabaseManager.MULTIPLE_ITEM_ENDPOINT + ",".join(pair_address_dictionary.get(key) for key in pair_address_dictionary.keys())
+
+        updated_database = update_database_entries(multiple_item_endpoint(pair_address_dictionary(DexscreenerDatabaseManager.FISH_LIST + DexscreenerDatabaseManager.PLANT_LIST))) | update_database_entries(multiple_item_endpoint(pair_address_dictionary(DexscreenerDatabaseManager.STONES_LIST + DexscreenerDatabaseManager.TEARS_AND_EGGS_LIST + DexscreenerDatabaseManager.CURRENCIES)))
+
+        return updated_database
 
 
-        fish_and_plant_addresses = {mat:pair_addresses_dictionary.get(mat) for mat in DexScreenerPrices.FISH_LIST + DexScreenerPrices.PLANT_LIST}
-        fish_and_plants_endpoint = DexScreenerPrices.MULTIPLE_ITEM_ENDPOINT + ",".join(fish_and_plant_addresses.get(key) for key in fish_and_plant_addresses.keys())
-        all_other_mats_addresses = {mat:pair_addresses_dictionary.get(mat) for mat in DexScreenerPrices.STONES_LIST + DexScreenerPrices.TEARS_AND_EGGS_LIST + DexScreenerPrices.CURRENCIES}
-        all_other_mats_endpoint = DexScreenerPrices.MULTIPLE_ITEM_ENDPOINT + ",".join(all_other_mats_addresses.get(key) for key in all_other_mats_addresses.keys())
-        fish_and_plant_prices = wjewel_discovery_prices(fish_and_plant_addresses, fish_and_plants_endpoint)
-        all_other_mats_prices = wjewel_discovery_prices(all_other_mats_addresses, all_other_mats_endpoint)
+       
+        
+    
+#initializer = InitializeDexscreenerJsonDatabase()
+dexscreener = DexscreenerDatabaseManager()
+#initializer.initialize_dexscreener_dfk_mats_prices_json()
+prices_dict = dexscreener._return_updated_database()
 
-        return fish_and_plant_prices | all_other_mats_prices
+for mat in prices_dict:
+    print(f"{mat}: {prices_dict.get(mat).get("priceNative")}") 
 
-'''
-dexscreener = DexScreenerPrices()
-prices_dict = dexscreener.wjewel_discovery_price_dictionary()
-for mat in DexScreenerPrices.FISH_LIST + DexScreenerPrices.PLANT_LIST + DexScreenerPrices.STONES_LIST + DexScreenerPrices.TEARS_AND_EGGS_LIST + DexScreenerPrices.CURRENCIES:
-    print(f"{mat}: {prices_dict.get(mat)}")
-    print()
-'''
