@@ -50,24 +50,14 @@ class DexscreenerDatabaseManager(DexscreenerStaticValues):
     def _return_updated_database_dictionary(self):
         
         def updated_database_dictionary(multiple_item_endpoint):
-            return lambda pair_address_dictionary: {entry.get("baseToken").get("symbol").lower(): entry for entry in requests.get(multiple_item_endpoint(pair_address_dictionary)).json().get("pairs")}
-
-
-        def multiple_item_endpoint(pair_address_dictionary):
-            return lambda mats_list: DexscreenerDatabaseManager.MULTIPLE_ITEM_ENDPOINT + ",".join(address for address in pair_address_dictionary(mats_list).values())
-
+            return lambda mats_list: {entry.get("baseToken").get("symbol").lower(): entry.get("priceNative") for entry in requests.get(multiple_item_endpoint(mats_list)).json().get("pairs")}
 
         @updated_database_dictionary
-        @multiple_item_endpoint
-        def pair_address_dictionary(mats_list):
-            return {mat: self.dexscreener_dfk_mats_dictionary.get(mat).get("pair_address") for mat in mats_list}
+        def multiple_item_endpoint(mats_list):
+            return DexscreenerDatabaseManager.MULTIPLE_ITEM_ENDPOINT + ",".join(self.dexscreener_dfk_mats_dictionary.get(mat).get("pair_address") for mat in mats_list)
 
         #There is a rate limit of thirty items per call on the mulitple item endpoint api. This is why it is necessary to break this up into two calls and then unite the dictionary with this union. 
-        return pair_address_dictionary(DexscreenerDatabaseManager.FISH_LIST + DexscreenerDatabaseManager.PLANT_LIST) | pair_address_dictionary(DexscreenerDatabaseManager.STONES_LIST + DexscreenerDatabaseManager.TEARS_AND_EGGS_LIST + DexscreenerDatabaseManager.CURRENCIES) 
-
-
-
-       
+        return multiple_item_endpoint(DexscreenerDatabaseManager.FISH_LIST + DexscreenerDatabaseManager.PLANT_LIST) | multiple_item_endpoint(DexscreenerDatabaseManager.STONES_LIST + DexscreenerDatabaseManager.TEARS_AND_EGGS_LIST + DexscreenerDatabaseManager.CURRENCIES) 
         
     
 #initializer = InitializeDexscreenerJsonDatabase()
@@ -76,4 +66,4 @@ dexscreener = DexscreenerDatabaseManager()
 prices_dict = dexscreener._return_updated_database_dictionary()
 
 for mat in prices_dict:
-    print(f"{mat}: {prices_dict.get(mat).get("priceNative")}") 
+    print(f"{mat}: {prices_dict.get(mat)}") 
