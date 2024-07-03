@@ -36,6 +36,7 @@ class InitializeDexscreenerJsonDatabase(DexscreenerStaticValues):
 
 class DexscreenerDatabaseManager(DexscreenerStaticValues): 
     def __init__(self):
+
         self.dexscreener_dfk_mats_dictionary = self._load_dexscreener_dictionary()
 
 
@@ -46,14 +47,24 @@ class DexscreenerDatabaseManager(DexscreenerStaticValues):
         return dexscreenner_dictionary
 
         
-    def _return_updated_database(self):
-        update_database_entries = lambda endpoint: {entry.get("baseToken").get("symbol").lower():entry for entry in requests.get(endpoint).json().get("pairs")}
-        pair_address_dictionary  = lambda mats_list: {mat:self.dexscreener_dfk_mats_dictionary.get(mat).get("pair_address") for mat in mats_list }
-        multiple_item_endpoint = lambda pair_address_dictionary: DexscreenerDatabaseManager.MULTIPLE_ITEM_ENDPOINT + ",".join(pair_address_dictionary.get(key) for key in pair_address_dictionary.keys())
+    def _return_updated_database_dictionary(self):
+        
+        def updated_database_dictionary(multiple_item_endpoint):
+            return lambda pair_address_dictionary: {entry.get("baseToken").get("symbol").lower(): entry for entry in requests.get(multiple_item_endpoint(pair_address_dictionary)).json().get("pairs")}
 
-        updated_database = update_database_entries(multiple_item_endpoint(pair_address_dictionary(DexscreenerDatabaseManager.FISH_LIST + DexscreenerDatabaseManager.PLANT_LIST))) | update_database_entries(multiple_item_endpoint(pair_address_dictionary(DexscreenerDatabaseManager.STONES_LIST + DexscreenerDatabaseManager.TEARS_AND_EGGS_LIST + DexscreenerDatabaseManager.CURRENCIES)))
 
-        return updated_database
+        def multiple_item_endpoint(pair_address_dictionary):
+            return lambda mats_list: DexscreenerDatabaseManager.MULTIPLE_ITEM_ENDPOINT + ",".join(address for address in pair_address_dictionary(mats_list).values())
+
+
+        @updated_database_dictionary
+        @multiple_item_endpoint
+        def pair_address_dictionary(mats_list):
+            return {mat: self.dexscreener_dfk_mats_dictionary.get(mat).get("pair_address") for mat in mats_list}
+
+        #There is a rate limit of thirty items per call on the mulitple item endpoint api. This is why it is necessary to break this up into two calls and then unite the dictionary with this union. 
+        return pair_address_dictionary(DexscreenerDatabaseManager.FISH_LIST + DexscreenerDatabaseManager.PLANT_LIST) | pair_address_dictionary(DexscreenerDatabaseManager.STONES_LIST + DexscreenerDatabaseManager.TEARS_AND_EGGS_LIST + DexscreenerDatabaseManager.CURRENCIES) 
+
 
 
        
@@ -62,8 +73,7 @@ class DexscreenerDatabaseManager(DexscreenerStaticValues):
 #initializer = InitializeDexscreenerJsonDatabase()
 dexscreener = DexscreenerDatabaseManager()
 #initializer.initialize_dexscreener_dfk_mats_prices_json()
-prices_dict = dexscreener._return_updated_database()
+prices_dict = dexscreener._return_updated_database_dictionary()
 
 for mat in prices_dict:
     print(f"{mat}: {prices_dict.get(mat).get("priceNative")}") 
-

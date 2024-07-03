@@ -69,10 +69,13 @@ v-1.32
 - Built test for dexscreener api module.
 - Updated requirements.txt for project to work with python 3.12.
 
+v-1.4
+- Refactored dexscreener api to be split into an Enum style main class, an initializer sub class, and a database manager subclass.
+- Refactored _return_updated_database_dictionary to use decorators.
+- Found out why the key:value pairs were sometimes mismatching and fixed it.
+- Revamped json database to hold all relevent data for project
 
 Things I'm working on for future updates / pseudo coding:
-- Figure out why dexscreener api test is failing despite project seeming to work.
-- Create a json database that holds a last_updated key which will give you a datetime response. This database will also hold all the mats pair addresses as well as their last known prices and an updated_at_last_update boolean.
 - Create a module that checks the current datetime.now value against the last_updated value stored in the dexscreener_mats_data.json file. 
     - If the last value is greater than 6 hrs from the current Datetime.now value.
         - change the database value to Datetime.now.
