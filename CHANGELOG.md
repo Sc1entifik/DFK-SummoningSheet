@@ -75,14 +75,13 @@ v-1.4
 - Found out why the key:value pairs were sometimes mismatching and fixed it.
 - Revamped json database to hold all relevent data for project
 
+v-1.6
+- Created method which determines if it is time to update the materials database
+- Added missing mats to mats lists in dexscreener_api.py
+- Removed duplicate mats to mats lists in dexscreener_api.py
+- Built tests for dexscreener_api.py module
+
 Things I'm working on for future updates / pseudo coding:
-- Create a module that checks the current datetime.now value against the last_updated value stored in the dexscreener_mats_data.json file. 
-    - If the last value is greater than 6 hrs from the current Datetime.now value.
-        - change the database value to Datetime.now.
-        - Call a function which updates all the mat values if the values are pullable from the api.
-        - If the values were updated then set the updated_at_last_update boolean to true else false.
-- Separate the concerns of the class in dexscreener_api.py by splitting it into two classes where one retrieves data from the dexscreener_mats_data.json and the other updates the values in dexscreener_mats_data.json.
-- Build the tests to test all these things.
 - Build the front end routes for the material mining profitablility portion of the site
 - Build the instructions page for the material mining profitability tool.
 - Revamp front end for better styling and visibility.

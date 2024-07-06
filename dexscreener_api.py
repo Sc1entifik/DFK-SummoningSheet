@@ -1,6 +1,6 @@
 import requests
 import json
-from datetime import datetime as dt
+from datetime import datetime, timedelta
 
 class DexscreenerStaticValues:
     DEXSCREENER_DATABASE_FILEPATH = "dexscreener_dfk_mats_prices.json"
@@ -8,9 +8,9 @@ class DexscreenerStaticValues:
     DATABASE_DATETIME_FORMAT = "%Y/%m/%d %H:%M"
     ITEM_QUERY_ENDPOINT = "https://api.dexscreener.com/latest/dex/search?q="
     MULTIPLE_ITEM_ENDPOINT = f"https://api.dexscreener.io/latest/dex/pairs/{CHAIN_ID}/"
-    FISH_LIST = ("dfkbloater", "dfkironscale", "dfklanterneye", "dfkredgill", "dfksilverfin", "dfksailfish", "dfkfbloater", "dfkspckltl", "dfkthreel", "dfkkingpncr")
-    PLANT_LIST= ("dfkrgwd", "dfkrckrt", "dfkrdlf", "dfkdrkwd", "dfkambrtfy", "dfkgldvn", "dfkswfthsl", "dfkfrostdrm", "dfkknaproot", "dfkdrkwd", "dfkshagcap", "dfksknshade", "dfkbluestem", "dfkspidrfrt", "dfkmilkweed")
-    STONES_LIST = ("dfkshvas", "dfkmoksha", "dfklmghtcr", "dfklswftcr", "dfklfrticr", "dfklinscr", "dfklvgrcr", "dfklwitcr", "dfklfrtucr")
+    FISH_LIST = ("dfkbloater", "dfkironscale", "dfklanterneye", "dfkredgill", "dfksilverfin", "dfkshimmerskin", "dfksailfish", "dfkfbloater", "dfkspckltl", "dfkthreel", "dfkkingpncr")
+    PLANT_LIST= ("dfkrgwd", "dfkrckrt", "dfkrdlf", "dfkdrkwd", "dfkambrtfy", "dfkgldvn", "dfkswfthsl", "dfkfrostdrm", "dfkknaproot", "dfkshagcap", "dfksknshade", "dfkbluestem", "dfkspidrfrt", "dfkmilkweed")
+    STONES_LIST = ("dfkshvas", "dfkmoksha", "dfklmghtcr", "dfklswftcr", "dfklfrticr", "dfklinscr", "dfklvgrcr", "dfklwitcr", "dfklfrtucr", "dfklfrtist")
     TEARS_AND_EGGS_LIST = ("dfktears", "dfkblueegg", "dfkgregg", "dfkgreenegg", "dfkyelowegg", "dfkgoldegg")
     CURRENCIES = ("dfkgold", "klay")
     
@@ -31,12 +31,13 @@ class InitializeDexscreenerJsonDatabase(DexscreenerStaticValues):
         initial_database = map(self._update_single_database_entry, full_item_list) 
 
         with open(DexscreenerDatabaseManager.DEXSCREENER_DATABASE_FILEPATH, "w") as dexscreener_database:
-            json.dump({key:value for key, value in zip(full_item_list, initial_database)} | {"last_updated": dt.now().strftime(DexscreenerDatabaseManager.DATABASE_DATETIME_FORMAT)}, dexscreener_database)
+            json.dump({key:value for key, value in zip(full_item_list, initial_database)} | {"last_updated": datetime.now().strftime(DexscreenerDatabaseManager.DATABASE_DATETIME_FORMAT)}, dexscreener_database)
+
+        print(f"New materials database initialized at {InitializeDexscreenerJsonDatabase.DEXSCREENER_DATABASE_FILEPATH}")
     
 
 class DexscreenerDatabaseManager(DexscreenerStaticValues): 
     def __init__(self):
-
         self.dexscreener_dfk_mats_dictionary = self._load_dexscreener_dictionary()
 
 
@@ -58,12 +59,40 @@ class DexscreenerDatabaseManager(DexscreenerStaticValues):
 
         #There is a rate limit of thirty items per call on the mulitple item endpoint api. This is why it is necessary to break this up into two calls and then unite the dictionary with this union. 
         return multiple_item_endpoint(DexscreenerDatabaseManager.FISH_LIST + DexscreenerDatabaseManager.PLANT_LIST) | multiple_item_endpoint(DexscreenerDatabaseManager.STONES_LIST + DexscreenerDatabaseManager.TEARS_AND_EGGS_LIST + DexscreenerDatabaseManager.CURRENCIES) 
+
+
+    def update_database_prices(self):
+        updated_prices = self._return_updated_database_dictionary()
+        mats_not_updated = (mat for mat in self.dexscreener_dfk_mats_dictionary.keys() if not updated_prices.get(mat))
         
+        for mat in mats_not_updated:
+            if mat != "last_updated":
+                self.dexscreener_dfk_mats_dictionary.get(mat)["updated_at_last_update"] = False
+
+        for mat in updated_prices.keys():
+            self.dexscreener_dfk_mats_dictionary.get(mat)["price_native"] = updated_prices.get(mat)
+            self.dexscreener_dfk_mats_dictionary.get(mat)["updated_at_last_update"] = True
+
+        with open(DexscreenerDatabaseManager.DEXSCREENER_DATABASE_FILEPATH, "w") as dexscreener_database:
+            json.dump(self.dexscreener_dfk_mats_dictionary, dexscreener_database)
+
+        print(f"Relational json database has been updated at {DexscreenerDatabaseManager.DEXSCREENER_DATABASE_FILEPATH}")
+
+
+    def is_update_time(self):
+        time_difference = datetime.now() - datetime.strptime(self.dexscreener_dfk_mats_dictionary.get("last_updated"), self.DATABASE_DATETIME_FORMAT)
+
+        return time_difference >= timedelta(hours=6)
+        
+
+
     
 #initializer = InitializeDexscreenerJsonDatabase()
-dexscreener = DexscreenerDatabaseManager()
+#dexscreener = DexscreenerDatabaseManager()
 #initializer.initialize_dexscreener_dfk_mats_prices_json()
-prices_dict = dexscreener._return_updated_database_dictionary()
+#dexscreener.update_database_prices()
 
-for mat in prices_dict:
-    print(f"{mat}: {prices_dict.get(mat)}") 
+'''
+for mat, price in dexscreener.dexscreener_dfk_mats_dictionary.items():
+    print(f"{mat}: {price}") 
+'''
