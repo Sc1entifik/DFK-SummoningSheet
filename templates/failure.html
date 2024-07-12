@@ -1,27 +1,30 @@
+<!DOCTYPE html>
 {% extends 'base.html' %}
-{% block content %}
-<h2>Oops! It looks like you broke the internet again... Just kidding.<h2>
-<br>
-<h2>You likely got to this page for one of the following reasons:</h2>
-<div class="failure_list_center">
-	<div class="failure_list_left_align">
-		<li class="failure_list">You have whitespace at the end of one of your entries or you have an empty line at the bottom of your list.</li>
-		<li class="failure_list">You entered a different number of hero costs than the number of heroes you entered in the corresponding cost form.</li>
-		<li class="failure_list">You entered a hero number in the wrong realm form and a hero with that number doesn't exist in that realm. See instructions page under verifying kingdom.</li>
-		<li class="failure_list">You entered a hero number incorrectly and THAT hero doesn't exist.</li>
+<html>
+	{% block content %}
+	<head>
+		<title>Failure Page</title>
+		<link rel="stylesheet" href='{{ url_for("static", filename="css/failure.css") }}'/>
+	</head>
+	<h2>Oops! It looks like you broke the internet again... Just kidding.<h2>
+	<h2>You likely got to this page for one of the following reasons:</h2>
+	<div class="failure_list_center">
+		<div class="failure_list_left_align">
+			<li class="failure_list">You have whitespace at the end of one of your entries or you have an empty line at the bottom of your list.</li>
+			<li class="failure_list">You entered a different number of hero costs than the number of heroes you entered in the corresponding cost form.</li>
+			<li class="failure_list">You entered a hero number in the wrong realm form and a hero with that number doesn't exist in that realm. See instructions page under verifying kingdom.</li>
+			<li class="failure_list">You entered a hero number incorrectly and THAT hero doesn't exist.</li>
+		</div>
 	</div>
-</div>
-<br>
-<br>
-<h2>Here are some things to try:</h2>
-<div class="failure_list_center">
-	<div class="failure_list_left_align">
-		<li class="failure_list">Make sure you have no whitespace at the end of any of your entries and you don't have an extra line at the end of any of your lists</li>
-		<li class="failure_list">Leave all cost lists blank. The site will default blank cost lists to 0 for each hero in that realm list.</li>
-		<li class="failure_list">Make sure you entered the same number of heroes than you did costs for each realm</li>
-		<li class="failure_list">Double check your hero numbers 1777408 can easily look like 177408.</li>
+	<h2>Here are some things to try:</h2>
+	<div class="failure_list_center">
+		<div class="failure_list_left_align">
+			<li class="failure_list">Make sure you have no whitespace at the end of any of your entries and you don't have an extra line at the end of any of your lists</li>
+			<li class="failure_list">Leave all cost lists blank. The site will default blank cost lists to 0 for each hero in that realm list.</li>
+			<li class="failure_list">Make sure you entered the same number of heroes than you did costs for each realm</li>
+			<li class="failure_list">Double check your hero numbers 1777408 can easily look like 177408.</li>
+		</div>
 	</div>
-</div>
-</ul>
 
 {% endblock %}
+<html>

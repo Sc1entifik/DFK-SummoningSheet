@@ -1,0 +1,28 @@
+.entryform {
+	color: hsl(120, 57%, 55%);/*Forest Green*/
+	font-weight: 600;
+	font-family: 'MedievalSharp';
+	font-size: 16px;
+	padding: 5px;
+}
+
+
+.form-center {
+	text-align: center;
+}
+
+
+.form-align {
+	display: inline-block;
+	text-align: left;
+}
+
+
+.submit-button {
+	font-size: x-large;
+	background-color: hsl(270, 97%, 11%);/*Royal Purple*/
+	color: hsl(60, 87%, 87%);/*White Gold*/
+	box-shadow: .1em .1em .2em -.0002em hsl(120, 57%, 55%)/*Forest Green*/;
+	border-radius: 5px;
+}
+

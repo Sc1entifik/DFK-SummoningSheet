@@ -81,9 +81,16 @@ v-1.6
 - Removed duplicate mats to mats lists in dexscreener_api.py
 - Built tests for dexscreener_api.py module
 
+v-1.62
+- Broke up css files for better modularity and readability.
+- Changed most css unit values to relative values.
+- Improved front end aestetics.
+- Used calc function with footer for better placement with relative positioning instead of absolute.
+
+
 Things I'm working on for future updates / pseudo coding:
 - Build the front end routes for the material mining profitablility portion of the site
 - Build the instructions page for the material mining profitability tool.
 - Revamp front end for better styling and visibility.
+- Add media query/queries to resize all relative sizing units to fit all screen types.
 - Fix bug where whitespace is not trimmed from entry forms.
-

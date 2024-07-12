@@ -1,175 +1,74 @@
 @import url("https://fonts.googleapis.com/css2?family=MedievalSharp");
 
+
 html {
-	background-color: #F2EBE5;
+	background-color: hsl(270, 87%, 7%);/* Royal Purple */
+	font-family: "MedievalSharp";
 }
 
-.entryform {
-	color: maroon;
-	font-weight: 600;
-	font-family: 'MedievalSharp';
-	font-size: 16px;
-	padding: 5px;
-}
-
-.form_center {
-	text-align: center;
-}
-
-.form_align {
-	display: inline-block;
-	text-align: left;
-}
-
-.submit_button {
-	font-size: x-large;
-	color: darkblue;
-}
-
-
-.content-table {
-	font-family: 'MedievalSharp';
-	border-collapse: collapse;
-	margin: 25px 0;
-	font-size: 0.9em;
-	min-width: 400px;
-	border-radius: 5px 5px 0 0;
-	overflow: hidden;
-	box-shadow; 0 0 20px rgba(0,0,0,0.15);
-}
-
-.content-table thead tr {
-	background-color: maroon;
-	color: gold;
-	text-align: center;
-	font-weight: bold;
-	font-size: 1.2em;
-}
-
-.content-table th, .content-table td {
-	padding: 12px 15px;
-}
-
-.content-table tbody tr {
-	color: green;
-	border-bottom: 1px solid #dddddd;
-}
-
-.content-table tbody tr:nth-of-type(even) {
-	background-color: #f3f3f3;
-}
-
-.content-table tbody tr:last-of-type {
-	border-bottom: 2px solid #009879;
-}
-
-.description {
-	font-family: 'MedievalSharp';
-	font-size: 22px;
-	font-style: bold;
-	text-align: center;
-}
-
-.main_page_link {
-	font-family: 'MedievalSharp';
-	text-align: center;
-	font-size: 27px;
-	font-weight: 400;
-	padding: 9px;
-}
-
-.instructions {
-	font-family: 'MedievalSharp';
-	font-size: 17px;
-	font-weight: 600;
-	padding: 2px;
-	line-height: 25px;
-	color: maroon;
-}
 
 .homepage_link {
-	font-family: 'MedievalSharp';
-	font-size: 22px;
+	font-size: 1.5rem;
 	text-align: center;
-	color: green;
-}
-
-.failure_list_center {
-	text-align: center;
-
-}
-
-.failure_list_left_align {
-	display: inline-block;
-	text-align: left;
-}
-
-.failure_list {
-	font-family: 'MedievalSharp';
-	font-size 14px;
-	color black;
+	color: hsl(120, 87%, 35%);/*Forest Green*/
 }
 
 
 h1 {
-	font-family: 'MedievalSharp'; 
-	font-size: 60px; 
+	font-size: 4rem; 
 	font-style: normal; 
 	font-variant: normal; 
 	font-weight: 700; 
-	color: green;
+	color: hsl(120, 87%, 35%);/*Forest Green*/
+	margin-top: 3px;
 	text-align: center;
-	line-height: 26.4px; 
-	padding: 25px;
 } 
+
 
 h2 {
-	font-family: 'MedievalSharp';
-	font-size: 45px;
-	font-style: normal;
 	text-align: center;
-	color: black;
+	font-size: 3rem;
+	font-style: normal;
+	color: hsl(120, 87%, 35%);/*Forest Green*/
 }
 
+
 h3 { 
-	padding: 7px;
-	font-family: 'MedievalSharp'; 
-	font-size: 30px; 
+	font-size: 2rem; 
 	font-style: normal; 
 	font-variant: normal; 
 	font-weight: 700; 
-	line-height: 15.4px; 
 	text-align: center;
+	color: hsl(270, 87%, 88%);/*Text Purple*/
 } 
 
+
 h4 {
-	padding: 4px;
-	font-family: 'MedievalSharp';
-	font-size: 30px;
+	font-size: 1.8rem;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 700;
-	line-height: 15.4px;
+	line-height: 1rem;
 	text-align: left;
-	color: maroon;
+	color: hsl(270, 87%, 35%);/* Royal Purple */
 }
 
+
 p { 
-	font-family: 'MedievalSharp'; 
-	font-size: 14px; 
+	font-size: 1rem; 
 	font-style: normal; 
 	font-variant: normal; 
 	font-weight: 400; 
-	line-height: 20px; 
+	line-height: 1.3rem; 
 } 
+
 
 footer {
 	font-weight: 400;
-	color: blue;
+	color: hsl(60, 87%, 87%);/*White Gold*/
 	text-align: center;
-	position: fixed;
-	padding: 3px;
-	bottom: 0;
-	height: 75px; 
+	position: relative;
+	top: 7vh;
+	height: 1rem; 
 	width: 100%;
 }

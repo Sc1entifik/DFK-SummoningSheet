@@ -1,0 +1,31 @@
+.description {
+	color: hsl(60, 87%, 87%);/*White Gold*/
+	font-size: 1.5rem;
+	font-style: bold;
+	text-align: center;
+}
+
+.main-page-link {
+	font-size: 1.7rem;
+	font-weight: 400;
+	color: hsl(60, 87%, 87%);/*White Gold*/
+}
+
+.main-page-link a {
+	color: hsl(60, 87%, 87%);/*White Gold*/
+}
+
+
+.options-flex-container {
+	margin-top: calc(0.27 * (100vh - 17px));
+	display: flex;
+	justify-content: center;
+}
+
+.options {
+	display: flex;
+	flex-direction: column;
+	align-content: space-between;
+}
+
+

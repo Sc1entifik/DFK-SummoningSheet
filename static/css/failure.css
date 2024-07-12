@@ -1,0 +1,25 @@
+.failure_list_center {
+	text-align: center;
+}
+
+
+.failure_list_left_align {
+	display: inline-block;
+	text-align: left;
+}
+
+
+.failure_list {
+	font-size: 1rem;
+	color: hsl(60,87%,87%);/*White Gold*/
+}
+
+.donation-info {
+	font-weight: 400;
+	color: hsl(60, 87%, 87%);/*White Gold*/
+	text-align: center;
+	position: relative;
+	top: calc(0.4 * (100vh - 17px));
+	height: 1rem; 
+	width: 100%;
+}
