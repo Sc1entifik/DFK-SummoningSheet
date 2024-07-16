@@ -21,7 +21,7 @@ class HeroGenetics():
         {var_name}
          }}
         }}'''.format(hero_id=self.hero_id,var_name=var_name)
-        result = requests.post(HeroGenetics.api_url,json={'query':query})
+        result = requests.post(HeroGenetics.api_url, json={'query':query})
         gene_query_results = result.json()['data']['heroes']
 
         return gene_query_results[0].get(var_name)
@@ -55,7 +55,7 @@ class HeroGenetics():
         hero_class = {0: "Warrior", 1: "Knight", 2: "Thief", 3: "Archer", 4: "Priest", 5: "Wizard", 6: "Monk", 7: "Pirate", 8: "Berserker", 9: "Seer", 10: "Legionnaire", 11: "Scholar", 16: "Paladin", 17: "DarkKnight", 18: "Summoner", 19: "Ninja", 20: "Shapeshifter", 21: "Bard", 24: "Dragoon", 25: "Sage", 26: "SpellBow", 28: "DreadKnight"}
         profession = {0: "Mining", 2: "Gardening", 4: "Fishing", 6: "Foraging"}
         stats = {0: "Strength", 2: "Agility", 4: "Intelligence", 6: "Wisdom", 8: "Luck", 10: "Vitality", 12: "Endurance", 14: "Dexterity"}
-        active_passive = {0: "Basic1", 1: "Basic2", 2: "Basic3", 3: "Basic4", 4: "Basic5", 5: "Basic6", 6: "Basic7", 7: "Basic8", 16: "Advanced1",    17: "Advanced2", 18: "Advanced3", 19: "Advanced4", 20: "Advanced5", 21: "Advanced6", 22: "Advanced7", 23: "Advanced8", 24: "Elite1", 25: "Elite2", 26: "Elite3", 27:"Elite4", 28: "Transcendant1", 29:"Transcendant2"}
+        active_passive = {0: "Basic1", 1: "Basic2", 2: "Basic3", 3: "Basic4", 4: "Basic5", 5: "Basic6", 6: "Basic7", 7: "Basic8", 16: "Advanced1", 17: "Advanced2", 18: "Advanced3", 19: "Advanced4", 20: "Advanced5", 21: "Advanced6", 22: "Advanced7", 23: "Advanced8", 24: "Elite1", 25: "Elite2", 26: "Elite3", 27:"Elite4", 28: "Transcendant1", 29:"Transcendant2"}
         element = {0: "Fire", 2: "Water", 4: "Earth", 6: "Wind", 8: "Lightning", 10: "Ice", 12: "Light", 14: "Dark"}
 
         #visual gene decodings
