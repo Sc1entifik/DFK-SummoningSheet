@@ -54,7 +54,7 @@ class SummonStatistics:
     def _remaining_stats_steps_with_or_without_mutation(stats):
 
 
-        def wrapper(self,gene_type_selector,genetic_stat_set_key):
+        def wrapper(self,gene_type_selector, genetic_stat_set_key):
             hero_1_odds, hero_2_odds = stats(self, gene_type_selector, genetic_stat_set_key)
             mutability_dictionary = self._class_mutability_dictionary.get(genetic_stat_set_key, {key:False for key in tuple(hero_1_odds.keys())})
             hero_1_stats = self.hero_1_visual_genes.get(genetic_stat_set_key) if gene_type_selector == 'visual_genes' else self.hero_1_stats_genes.get(genetic_stat_set_key)
@@ -78,11 +78,12 @@ class SummonStatistics:
                     bypass_h1, bypass_h2 = iteration_bypass_hero_1_and_hero_2_stat()
                     
                     #handles the rare occurance of both hero_1 stat and hero_2 stat matching mutation stat on two or more consecutive levels at the same time
-                    if hero_1_stat == bypass_h1 and hero_2_stat == bypass_h2:
+                    if hero_1_stat == bypass_h1 and hero_2_stat == bypass_h2 and i!= 0:
                         i -= 1
                         continue
 
                     else:
+
                         while hero_1_stat_pass_odds == 0:
                             hero_1_mutation_index -= 1
                             hero_1_stat_pass_odds = hero_1_value_dictionary.get(SummonStatistics.gene_type_list[hero_1_mutation_index])
@@ -146,11 +147,11 @@ class SummonStatistics:
         return hero_1_odds, hero_2_odds
 
 
-    def stats_genes_dictionary(self):
+    def summon_stats_genetics_dictionary(self):
         return {key:self._initial_stats_step('stats_genes', key) for key in HeroGenetics.stat_keys}
 
 
-    def visual_gene_dictionary(self):
+    def summon_visual_genetics_dictionary(self):
         return {key:self._initial_stats_step('visual_genes', key) for key in HeroGenetics.visual_keys}
     
 
@@ -172,20 +173,3 @@ class SummonStatistics:
         return summon_rarity_odds
 
 
-
-#summon = SummonStatistics(2000000014834, 1000000149421) 
-#child_stats_dict = summon.stats_genes_dictionary()
-#child_stats_dict = summon.visual_gene_dictionary()
-#child_stats_dict = summon.wanted_profession_and_hero_1_class()
-#child_stats_dict = summon.summon_rarity_odds()
-#print(f'{child_stats_dict}')
-'''
-hero_1 = 1000000177740
-hero_2 = 2000000113380 
-hero_3 = 1000000175115
-summon_1 = SummonStatistics(hero_1, hero_2)
-summon_3 = SummonStatistics(hero_1, hero_3)
-print(summon_1.hero_1_stats_genes)
-print()
-print(summon_3.hero_1_stats_genes)
-'''

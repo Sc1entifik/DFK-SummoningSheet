@@ -57,7 +57,7 @@ class StatsController:
         your_hero = self.hero_input_form.your_hero.data if self.hero_input_form.your_hero_realm.data == 'Serendale' else self._return_hero_number_with_realm_prefix(self.hero_input_form.your_hero.data, your_hero = True)
         your_hero_summon_cost = 0 if self.hero_input_form.your_hero_summon_cost.data == ''  else float(self.hero_input_form.your_hero_summon_cost.data)
         summon_statistics_list = [SummonStatistics(your_hero, candidate) for candidate in candidate_id_list]
-        summon_odds_list = [stats_dict.stats_genes_dictionary() for stats_dict in summon_statistics_list]
+        summon_odds_list = [stats_dict.summon_stats_genetics_dictionary() for stats_dict in summon_statistics_list]
         wanted_profession, hero_1_class = summon_statistics_list[0].wanted_profession_and_hero_1_class()
 
         for i in range(len(summon_statistics_list)):

@@ -88,11 +88,19 @@ v-1.62
 - Used calc function with footer for better placement with relative positioning instead of absolute.
 
 v-1.621
-- Trying to locate bug origin
+- Discovered bug rarely giving strange hero summons odds.
 - Refactored some code
 - Renamed variables
 - Removed an unneccesary variables from summoning_stat_calculations.py
 - Added comment for extra clarity.
+
+
+v-1.63
+- Found and fixed bug.
+- Bug only triggered rarely when dominant and recessive 3 genes triggered on both heroes at the same time. This was due to a block changing the index value to -1 which would call the recessive_3 gene which is an unwanted behavior
+- Changed boolean to not trigger the code block if the index value is zero which is the index for dominant.
+- Changed the name of stats_genes_dictionary in summoning_stat_calculations.py to summon_stats_genetics_dictionary
+
 
 
 Things I'm working on for future updates / pseudo coding:
@@ -101,3 +109,4 @@ Things I'm working on for future updates / pseudo coding:
 - Revamp front end for better styling and visibility.
 - Add media query/queries to resize all relative sizing units to fit all screen types.
 - Fix bug where whitespace is not trimmed from entry forms.
+- Look into getting some tests written
