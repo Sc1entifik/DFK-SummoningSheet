@@ -51,8 +51,10 @@ class SummonStatistics:
         return f'{tple} mutation combo not found!',0
     
 
-    def _remaining_stats_steps(stats):
-        def with_or_without_mutation(self,gene_type_selector,genetic_stat_set_key):
+    def _remaining_stats_steps_with_or_without_mutation(stats):
+
+
+        def wrapper(self,gene_type_selector,genetic_stat_set_key):
             hero_1_odds, hero_2_odds = stats(self, gene_type_selector, genetic_stat_set_key)
             mutability_dictionary = self._class_mutability_dictionary.get(genetic_stat_set_key, {key:False for key in tuple(hero_1_odds.keys())})
             hero_1_stats = self.hero_1_visual_genes.get(genetic_stat_set_key) if gene_type_selector == 'visual_genes' else self.hero_1_stats_genes.get(genetic_stat_set_key)
@@ -111,33 +113,35 @@ class SummonStatistics:
 
                 i -= 1
             return child_stats_odds
-        return with_or_without_mutation
+
+        return wrapper
 
 
-    @_remaining_stats_steps
+    @_remaining_stats_steps_with_or_without_mutation
     def _initial_stats_step(self, gene_type_selector, genetic_stat_set_key):
 
+        #removes bottom level recessive genes and rolls it into top level recessive gene in the case where two consecutive gene types match example: dominant ninja recessive_1 ninja gets rolled to dominant ninja with recessive_1 being removed 
         def _stats_compressor(stat_set):
-            keys_list = stat_set.keys()
-            stats_list = [.75, .1875, .046875, .015625]
-            odds_dict = lambda x: {key:value for key,value in zip(x,stats_list)}
-            return_dict = odds_dict(keys_list)
-            stat_keys = tuple(keys_list)
+            stat_keys = tuple(stat_set.keys())
+            stat_odds = [.75, .1875, .046875, .015625]
+            stats_compressor = {key:value for key,value in zip(stat_keys, stat_odds)}
             i = len(stat_keys)-1
+
 
             while i >= 1:
                 if stat_set.get(stat_keys[i]) == stat_set.get(stat_keys[i-1]):
-                    return_dict[stat_keys[i-1]] += return_dict[stat_keys[i]]
-                    del return_dict[stat_keys[i]]
+                    stats_compressor[stat_keys[i-1]] += stats_compressor[stat_keys[i]]
+                    del stats_compressor[stat_keys[i]]
 
                 i -= 1
-            return return_dict
+
+            return stats_compressor
+
 
         hero_1_stat_set = self.hero_1_visual_genes.get(genetic_stat_set_key) if gene_type_selector == 'visual_genes' else self.hero_1_stats_genes.get(genetic_stat_set_key)
         hero_2_stat_set = self.hero_2_visual_genes.get(genetic_stat_set_key) if gene_type_selector == 'visual_genes' else self.hero_2_stats_genes.get(genetic_stat_set_key)
         hero_1_odds = _stats_compressor(hero_1_stat_set) 
         hero_2_odds = _stats_compressor(hero_2_stat_set) 
-            
         
         return hero_1_odds, hero_2_odds
 
@@ -175,3 +179,13 @@ class SummonStatistics:
 #child_stats_dict = summon.wanted_profession_and_hero_1_class()
 #child_stats_dict = summon.summon_rarity_odds()
 #print(f'{child_stats_dict}')
+'''
+hero_1 = 1000000177740
+hero_2 = 2000000113380 
+hero_3 = 1000000175115
+summon_1 = SummonStatistics(hero_1, hero_2)
+summon_3 = SummonStatistics(hero_1, hero_3)
+print(summon_1.hero_1_stats_genes)
+print()
+print(summon_3.hero_1_stats_genes)
+'''

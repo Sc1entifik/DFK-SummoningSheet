@@ -87,6 +87,13 @@ v-1.62
 - Improved front end aestetics.
 - Used calc function with footer for better placement with relative positioning instead of absolute.
 
+v-1.621
+- Trying to locate bug origin
+- Refactored some code
+- Renamed variables
+- Removed an unneccesary variables from summoning_stat_calculations.py
+- Added comment for extra clarity.
+
 
 Things I'm working on for future updates / pseudo coding:
 - Build the front end routes for the material mining profitablility portion of the site
