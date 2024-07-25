@@ -170,6 +170,7 @@ class SummonStatistics:
         hero_1_rarity = self._hero_1_genetics.hero_rarity()
         hero_2_rarity = self._hero_2_genetics.hero_rarity()
         summon_rarity_odds = odds_dict(rarity_odds.get(hero_1_rarity)) if hero_1_rarity == hero_2_rarity else odds_dict(tuple(map(two_num_average, zip(rarity_odds.get(hero_1_rarity), rarity_odds.get(hero_2_rarity)))))
+
         return summon_rarity_odds
 
 

@@ -3,15 +3,8 @@ from wtforms import (StringField, TextAreaField, IntegerField, BooleanField, Rad
 from wtforms.validators import InputRequired
 
 class HeroInputForm(FlaskForm):
-    your_hero = StringField('Your Hero', validators = [InputRequired()])
-    your_hero_realm = RadioField('Your Hero Realm', choices = ['Serendale', 'Serendale 2', 'Crystalvale'], validators = [InputRequired()])
-    your_hero_summon_cost = StringField('Your Hero Summon Cost')
-
-    sd_candidate_list = TextAreaField('Serendale Candidates')
-    sd_summon_cost = TextAreaField('SD Candidate Hero Summon Cost + Hire Price')
-    
-    sd_2_candidate_list = TextAreaField('Serendale 2 Candidates')
-    sd_2_summon_cost = TextAreaField('SD 2 Candidate Hero Summon Cost + Hire Price')
-
-    cv_candidate_list = TextAreaField('Crystalvale Candidates')
-    cv_summon_cost = TextAreaField('CV Hero Summon Cost + Hire Price')
+    your_hero = StringField('Your Hero And Summon Cost:', validators=[InputRequired()])
+    your_hero_realm = RadioField('Your Hero Realm: ', choices = ['Serendale', 'Serendale 2', 'Crystalvale'], validators = [InputRequired()])
+    sd_candidate_list = TextAreaField('Serendale Candidates And Summon Costs:')
+    sd_2_candidate_list = TextAreaField('Serendale 2 Candidates And Summon Costs:')
+    cv_candidate_list = TextAreaField('Crystalvale Candidates And Summon Costs:')

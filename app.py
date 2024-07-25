@@ -16,7 +16,7 @@ def index():
         stats_list = [stats_dict for stats_dict in controller.summon_odds_list]
         table_header, header_span_dict, table_subheader, table_rows = controller.return_table_headers_and_rows()
 
-        return render_template('start_sheet.html', table_rows=table_rows, table_header=table_header, header_span=header_span_dict, table_subheader=table_subheader)
+        return render_template('start_sheet_2.html', table_rows=table_rows, table_header=table_header, header_span=header_span_dict, table_subheader=table_subheader)
 
     return render_template('index.html')
 

@@ -101,6 +101,9 @@ v-1.63
 - Changed boolean to not trigger the code block if the index value is zero which is the index for dominant.
 - Changed the name of stats_genes_dictionary in summoning_stat_calculations.py to summon_stats_genetics_dictionary
 
+v-1.7
+- Changed form to take hero costs inside the same input as the hero numbers for a cleaner looking user input experience.
+- Modified controller.py module to obtain data from the new forms.
 
 
 Things I'm working on for future updates / pseudo coding:

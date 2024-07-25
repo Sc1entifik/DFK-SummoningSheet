@@ -1,0 +1,49 @@
+.content-table {
+	border-collapse: collapse;
+	font-size: 0.9em;
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+
+.content-table thead tr {
+	background-color: hsl(120, 87%, 15%);/*Forest Green*/
+	color: hsl(60, 87%, 87%);/*Gold*/
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+
+.content-table th, .content-table td {
+	padding: 12px 15px;
+}
+
+
+.content-table tbody tr {
+	color: hsl(60, 87%, 87%);/*White Gold*/
+	/*color: hsl(270, 87%, 95%);/*Text Purple*/
+	border-bottom: 1px solid #dddddd;
+}
+
+
+.content-table tbody tr:nth-of-type(even) {
+	background-color: hsl(270, 97%, 37%);/*Royal Purple*/
+}
+
+
+.content-table tbody tr:last-of-type {
+	border-bottom: 2px solid #009879;
+}
+
+.donation-info {
+	font-weight: 400;
+	color: hsl(60, 87%, 87%);/*White Gold*/
+	text-align: center;
+	position: relative;
+	top: calc(0.5 * (100vh - 17px));
+	height: 1rem; 
+	width: 100%;
+}
+

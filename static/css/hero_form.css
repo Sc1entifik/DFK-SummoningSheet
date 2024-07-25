@@ -2,21 +2,35 @@
 	color: hsl(120, 57%, 55%);/*Forest Green*/
 	font-weight: 600;
 	font-family: 'MedievalSharp';
-	font-size: 16px;
+	font-size: 1rem;
 	padding: 5px;
 }
 
 
 .form-center {
-	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
 }
 
 
 .form-align {
-	display: inline-block;
-	text-align: left;
+	display: flex;
+	align-items: center;
+	flex-grow: 1;
+	flex-flow: wrap;
 }
 
+
+.submit-align {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-top: 2rem;
+}
 
 .submit-button {
 	font-size: x-large;
@@ -25,4 +39,16 @@
 	box-shadow: .1em .1em .2em -.0002em hsl(120, 57%, 55%)/*Forest Green*/;
 	border-radius: 5px;
 }
+
+
+label {
+	padding-right: 1rem;
+}
+
+
+textarea {
+	width: 15rem;
+	height: 5rem;
+}
+
 

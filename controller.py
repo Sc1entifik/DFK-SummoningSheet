@@ -29,33 +29,34 @@ class StatsController:
         self.indifferent_classes = StatsController.wanted_classes_dictionary.get(self.your_hero_class)[1]
         
 
-
     def _return_hero_number_with_realm_prefix(self, hero_num, your_hero = False):
         your_hero_prefix = '1' if self.hero_input_form.your_hero_realm.data == 'Crystalvale' else '2'
-        candidate_hero_prefix = '1' if hero_num in self.hero_input_form.cv_candidate_list.data.split() else '2'
+        candidate_hero_prefix = '1' if hero_num in (hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.cv_candidate_list.data.split()) else '2'
         prefix = your_hero_prefix if your_hero == True else candidate_hero_prefix
         padding = '0'
+        hero_number_with_realm_prefix_length = 13
 
-        while len(prefix + padding + str(hero_num)) < 13:
+        while len(prefix + padding + str(hero_num)) < hero_number_with_realm_prefix_length:
             padding += '0'
+
 
         return int(prefix + padding + str(hero_num))
 
 
     def _return_candidate_summon_cost_list(self):
-        sd_candidate_costs = tuple((0 for i in range(len(self.hero_input_form.sd_candidate_list.data.split())))) if self.hero_input_form.sd_summon_cost.data == '' else tuple(map(float, self.hero_input_form.sd_summon_cost.data.split()))
-        cv_candidate_costs = tuple((0 for i in range(len(self.hero_input_form.cv_candidate_list.data.split())))) if self.hero_input_form.cv_summon_cost.data == '' else tuple(map(float, self.hero_input_form.cv_summon_cost.data.split()))
-        sd_2_candidate_costs = tuple((0 for i in range(len(self.hero_input_form.sd_2_candidate_list.data.split())))) if self.hero_input_form.sd_2_summon_cost.data == '' else tuple(map(float, self.hero_input_form.sd_2_summon_cost.data.split()))
+        sd_candidate_costs = (float(hero_and_cost.split(",", 1)[1]) if len(hero_and_cost.split(",", 1)) == 2 else 0 for hero_and_cost in self.hero_input_form.sd_candidate_list.data.split())
+        cv_candidate_costs = (float(hero_and_cost.split(",", 1)[1]) if len(hero_and_cost.split(",", 1)) == 2 else 0 for hero_and_cost in self.hero_input_form.cv_candidate_list.data.split())
+        sd_2_candidate_costs = (float(hero_and_cost.split(",", 1)[1]) if len(hero_and_cost.split(",", 1)) == 2 else 0 for hero_and_cost in self.hero_input_form.sd_2_candidate_list.data.split())
 
-        return sd_candidate_costs + cv_candidate_costs + sd_2_candidate_costs
+        return tuple(sd_candidate_costs) + tuple(cv_candidate_costs) + tuple(sd_2_candidate_costs)
 
 
     def _return_summon_statistics_data(self):
-        candidate_normalized_id_list = (self.hero_input_form.sd_candidate_list.data.split() + self.hero_input_form.cv_candidate_list.data.split() + self.hero_input_form.sd_2_candidate_list.data.split())
-        candidate_id_list = (tuple(self.hero_input_form.sd_candidate_list.data.split()) + tuple(map(self._return_hero_number_with_realm_prefix, self.hero_input_form.cv_candidate_list.data.split())) + tuple(map(self._return_hero_number_with_realm_prefix, self.hero_input_form.sd_2_candidate_list.data.split())))
+        candidate_normalized_id_list = ([hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.sd_candidate_list.data.split()] + [hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.cv_candidate_list.data.split()] + [hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.sd_2_candidate_list.data.split()])
+        candidate_id_list = (tuple(hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.sd_candidate_list.data.split()) + tuple(map(self._return_hero_number_with_realm_prefix, (hero_and_cost.split("," ,1)[0] for hero_and_cost in self.hero_input_form.cv_candidate_list.data.split()))) + tuple(map(self._return_hero_number_with_realm_prefix, (hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.sd_2_candidate_list.data.split()))))
         candidate_summon_costs_list = self._return_candidate_summon_cost_list()
-        your_hero = self.hero_input_form.your_hero.data if self.hero_input_form.your_hero_realm.data == 'Serendale' else self._return_hero_number_with_realm_prefix(self.hero_input_form.your_hero.data, your_hero = True)
-        your_hero_summon_cost = 0 if self.hero_input_form.your_hero_summon_cost.data == ''  else float(self.hero_input_form.your_hero_summon_cost.data)
+        your_hero = self.hero_input_form.your_hero.data.split(",", 1)[0] if self.hero_input_form.your_hero_realm.data == 'Serendale' else self._return_hero_number_with_realm_prefix(self.hero_input_form.your_hero.data.split(",", 1)[0], your_hero = True)
+        your_hero_summon_cost = float(self.hero_input_form.your_hero.data.split(",", 1)[1]) if len(self.hero_input_form.your_hero.data.split(",", 1)) == 2 else 0 
         summon_statistics_list = [SummonStatistics(your_hero, candidate) for candidate in candidate_id_list]
         summon_odds_list = [stats_dict.summon_stats_genetics_dictionary() for stats_dict in summon_statistics_list]
         wanted_profession, hero_1_class = summon_statistics_list[0].wanted_profession_and_hero_1_class()

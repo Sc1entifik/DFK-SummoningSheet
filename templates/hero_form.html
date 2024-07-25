@@ -10,38 +10,50 @@
 	<form class="entryform" method = "POST" action = "/">
 		{{ form.csrf_token }}
 		<div class="form-center" >
-			<div class="form-align" >
-				{{form.your_hero.label}} <br> {{ form.your_hero(size = 20) }}
+
+			<div class="form-align">
+				{{form.your_hero.label}}{{ form.your_hero(placeholder="Hero# or Hero#,Cost") }}
 				<br>
 				<br>
-				{{ form.your_hero_realm.label }} <br>  {{ form.your_hero_realm(style="list-style:none") }}
-				{{form.your_hero_summon_cost.label}} <br> {{ form.your_hero_summon_cost(size = 20) }}
-				<br>
-				<br>
-				<br>
-				<br>
-				{{form.sd_candidate_list.label}} <br> {{form.sd_candidate_list(size = 20)}}
-				<br>
-				{{form.sd_summon_cost.label}} <br> {{form.sd_summon_cost(size = 20)}}
-				<br>
-				<br>
-				<br>
-				<br>
-				{{form.sd_2_candidate_list.label}} <br> {{form.sd_2_candidate_list(size = 20)}} 
-				<br>
-				{{form.sd_2_summon_cost.label}}	<br> {{form.sd_2_summon_cost(size = 20)}}
-				<br>
-				<br>
-				<br>
-				<br>
-				{{form.cv_candidate_list.label}} <br> {{form.cv_candidate_list(size = 20)}}
-				<br>
-				{{form.cv_summon_cost.label}} <br> {{form.cv_summon_cost(size = 20)}}
-				<br>
-				<br>
-				<input class="submit-button" type = "submit" value = "Create Summoner Sheet">
 			</div>
+			
+			<div class="form-align">
+				{{ form.your_hero_realm.label }}{{ form.your_hero_realm(style="list-style:none") }}
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+
+			<div class="form-align">
+				{{form.sd_candidate_list.label}}{{form.sd_candidate_list(placeholder="Hero# or Hero#,Cost\nHero# or Hero#,Cost\nHero# or Hero#,Cost")}}
+				<br>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+
+			<div class="form-align">
+				{{form.sd_2_candidate_list.label}}{{form.sd_2_candidate_list(placeholder="Hero# or Hero#,Cost\nHero# or Hero#,Cost\nHero# or Hero#,Cost")}} 
+				<br>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+
+			<div class="form-align">
+				{{form.cv_candidate_list.label}}{{form.cv_candidate_list(placeholder="Hero# or Hero#,Cost\nHero# or Hero#,Cost\nHero# or Hero#,Cost")}}
+				<br>
+			</div>
+				<br>
+				<br>
 		</div>
-	</form>
+
+		<div class="submit-align">
+			<input class="submit-button" type = "submit" value = "Create Summoner Sheet">
+		</div>
+</form>
 	{% endblock %}
 </html>
