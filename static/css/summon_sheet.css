@@ -1,41 +1,67 @@
-.content-table {
-	border-collapse: collapse;
-	font-size: 0.9em;
-	border-radius: 5px 5px 0 0;
-	overflow: hidden;
-	box-shadow: 0 0 20px rgba(0,0,0,0.15);
+.stats-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 2fr 1fr 1fr 1fr;
+	justify-content: stretch;
+	justify-items: center;
+	column-gap: 1.5rem;
 }
 
 
-.content-table thead tr {
-	background-color: hsl(120, 87%, 15%);/*Forest Green*/
-	color: hsl(60, 87%, 87%);/*Gold*/
-	text-align: center;
-	font-weight: bold;
-	font-size: 1.2em;
+.class-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	justify-content: stretch;
+	justify-items: center;
+	column-gap: 1.5rem;
+
 }
 
 
-.content-table th, .content-table td {
-	padding: 12px 15px;
+.rarity-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	justify-content: stretch;
+	justify-items: center;
+	column-gap: 1.5rem;
 }
 
 
-.content-table tbody tr {
-	color: hsl(60, 87%, 87%);/*White Gold*/
-	/*color: hsl(270, 87%, 95%);/*Text Purple*/
-	border-bottom: 1px solid #dddddd;
+.section-description {
+	color: hsl(120, 87%, 35%);
+	margin-top: 6rem;
+}
+
+.stat-header {
+	color: hsl(120, 87%, 35%);
+	font-size: 1.5rem;
+	line-height: 2rem;
+	margin-bottom: .12rem;
+	margin-top: .12rem;
 }
 
 
-.content-table tbody tr:nth-of-type(even) {
-	background-color: hsl(270, 97%, 37%);/*Royal Purple*/
+.stat-subheader {
+	color: hsl(120, 87%, 35%);
+	font-size: 1.2rem;
+}
+
+.multi-stat-subheader {
+	color: hsl(120, 87%, 35%);
+	font-size: 1.2rem;
+	word-spacing: 1.5rem;
 }
 
 
-.content-table tbody tr:last-of-type {
-	border-bottom: 2px solid #009879;
+.candidate-stats {
+	color: hsl(60, 87%, 87%);
+	font-size: .85rem;
+	word-spacing: 1.5rem;
 }
+
+.odds-disclaimer {
+	color: hsl(270, 87%, 95%);
+}
+
 
 .donation-info {
 	font-weight: 400;

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html>
+	{% block content %}
+	<head>
+		<link rel="stylesheet" href='{{ url_for("static", filename="css/summon_sheet.css") }}'/>
+	</head>
+
+	<h2 class="odds-disclaimer">All odds are displayed in decimal format.</h2>
+	
+
+	<h3 class="section-description">Profession + Stat Odds</h3>
+	
+	<div class="stats-grid">
+		<h4 class="stat-header">{{ controller.get("your_hero_num") }} Summon Candidates</h4>
+		<h4 class="stat-header">Summon Cost</h4>
+		<h4 class="stat-header">Profession</h4>
+		<h4 class="stat-header">Purple Stats</h4>
+		<h4 class="stat-header">Blue Stats</h4>
+		<h4 class="stat-header">Green Stats</h4>
+
+		<h5 class="stat-subheader">ID</h5>
+		<h5 class="stat-subheader">Cost</h5>
+		<h5 class="multi-stat-subheader">{{ controller.get("profession_order")[0] }} {{ controller.get("profession_order")[1] }} {{ controller.get("profession_order")[2] }} {{ controller.get("profession_order")[3] }}</h5>
+		<h5 class="multi-stat-subheader">{{  controller.get("wanted_stats")[0] }} {{  controller.get("wanted_stats")[1] }}</h5>
+		<h5 class="multi-stat-subheader">{{  controller.get("wanted_stats")[0] }} {{  controller.get("wanted_stats")[1] }}</h5>
+		<h5 class="multi-stat-subheader">{{  controller.get("wanted_stats")[0] }} {{  controller.get("wanted_stats")[1] }}</h5>
+
+		{% for candidate in controller.summon_odds_list  %}
+		<p class="candidate-stats">{{ candidate.get("hero_num") }}</p>
+		<p class="candidate-stats">{{ candidate.get("summon_cost") }}</p>
+		<p class="candidate-stats">{{ candidate.get("profession").get(controller.get("profession_order")[0], 0.0) }} {{ candidate.get("profession").get(controller.get("profession_order")[1], 0.0) }} {{ candidate.get("profession").get(controller.get("profession_order")[2], 0.0) }} {{ candidate.get("profession").get(controller.get("profession_order")[3], 0.0) }}</p>
+		<p class="candidate-stats">{{ candidate.get("purple_stat_boost").get( controller.get("wanted_stats")[0], 0.0) }} {{ candidate.get("purple_stat_boost").get( controller.get("wanted_stats")[1], 0.0) }}</p>
+		<p class="candidate-stats">{{ candidate.get("blue_stat_boost").get( controller.get("wanted_stats")[0], 0.0) }} {{ candidate.get("blue_stat_boost").get( controller.get("wanted_stats")[1], 0.0) }}</p>
+		<p class="candidate-stats">{{ candidate.get("green_stat_boost").get( controller.get("wanted_stats")[0], 0.0) }} {{ candidate.get("green_stat_boost").get( controller.get("wanted_stats")[1], 0.0) }}</p>
+		{% endfor %}
+	</div>
+
+	<h3 class="section-description">Class Odds</h3>
+	<div class="class-grid">
+		<h4 class="stat-header">{{ controller.get("your_hero_num") }} Summon Candidates</h4>
+		<h4 class="stat-header">Wanted Class Odds</h4>
+		<h4 class="stat-header">Opposing Mutation Class Odds</h4>
+		<h4 class="stat-header">Other</h4>
+
+		<h5 class="stat-subheader">ID</h5>
+		<h5 class="multi-stat-subheader">{{ controller.get("wanted_classes")[0] }} {{ controller.get("wanted_classes")[1] }} {{ controller.get("wanted_classes")[2] }}</h5>
+		<h5 class="multi-stat-subheader">{{ controller.get("opposing_mutation_classes")[0] }} {{ controller.get("opposing_mutation_classes")[1] }} {{ controller.get("opposing_mutation_classes")[2] }}</h5>
+		<h5 class="stat-subheader">Lemon %</h5>
+
+		{% for candidate in controller.summon_odds_list %}
+		<p class="candidate-stats">{{ candidate.get("hero_num") }}</p>
+		<p class="candidate-stats">{{ candidate.get("class_odds").get(controller.get("wanted_classes")[0], 0.0) }} {{candidate.get("class_odds").get(controller.get("wanted_classes")[1], 0.0)}} {{ candidate.get("class_odds").get(controller.get("wanted_classes")[2], 0.0) }}</p>
+		<p class="candidate-stats">{{ candidate.get("class_odds").get(controller.get("opposing_mutation_classes")[0], 0.0) }} {{ candidate.get("class_odds").get(controller.get("opposing_mutation_classes")[1], 0.0) }} {{ candidate.get("class_odds").get(controller.get("opposing_mutation_classes")[2], 0.0) }}</p>
+		<p class="candidate-stats">{{ candidate.get("class_odds").get("lemon") }}</p>
+		{% endfor %}
+	
+
+	</div>
+	
+	<h3 class="section-description">Rarity Odds</h3>
+	<div class="rarity-grid">
+		<h4 class="stat-header">{{ controller.get("your_hero_num") }} Summon Candidates</h4>
+		<h4 class="stat-header">Common</h4>
+		<h4 class="stat-header">Uncommon</h4>
+		<h4 class="stat-header">Rare</h4>
+		<h4 class="stat-header">Legenary</h4>
+		<h4 class="stat-header">Mythic</h4>
+
+		{% for candidate in controller.summon_odds_list %}
+		<p class="candidate-stats"> {{ candidate.get("hero_num") }}</p>
+		<p class="candidate-stats"> {{ candidate.get("rarity_odds").get("common") }}</p>
+		<p class="candidate-stats"> {{ candidate.get("rarity_odds").get("uncommon") }}</p>
+		<p class="candidate-stats"> {{ candidate.get("rarity_odds").get("rare") }}</p>
+		<p class="candidate-stats"> {{ candidate.get("rarity_odds").get("legendary") }}</p>
+		<p class="candidate-stats"> {{ candidate.get("rarity_odds").get("mythic") }}</p>
+		{% endfor %}
+
+	</div>
+
+
+	{% endblock %}
+</html>

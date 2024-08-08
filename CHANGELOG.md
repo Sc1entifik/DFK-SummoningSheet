@@ -106,6 +106,14 @@ v-1.7
 - Modified controller.py module to obtain data from the new forms.
 
 
+v-1.8
+- Removed all table row and header methods from controller.py
+- Modified controller.py to return a dictionary for filling out the end Summoner Sheet page instead of table and header lists
+- Small refactors on gene_class.py, controller.py, and summoning_stat_calculations.py for cleaner and more maintainable code.
+- Renamed start_sheet.html to summon_sheet.html.
+- Revamped summon_sheet.html to display data with a .css grid instead of a table layout.
+- Huge modifications to summon_sheet.css to reflect new grid layout.
+
 Things I'm working on for future updates / pseudo coding:
 - Build the front end routes for the material mining profitablility portion of the site
 - Build the instructions page for the material mining profitability tool.

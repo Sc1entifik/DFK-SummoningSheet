@@ -26,7 +26,7 @@ class StatsController:
         self.profession_order = StatsController.profession_order_dictionary.get(self.wanted_profession)
         self.wanted_stats = StatsController.wanted_stats_dictionary.get(self.wanted_profession)
         self.wanted_classes = StatsController.wanted_classes_dictionary.get(self.your_hero_class)[0]
-        self.indifferent_classes = StatsController.wanted_classes_dictionary.get(self.your_hero_class)[1]
+        self.opposing_mutation_classes = StatsController.wanted_classes_dictionary.get(self.your_hero_class)[1]
         
 
     def _return_hero_number_with_realm_prefix(self, hero_num, your_hero = False):
@@ -73,50 +73,36 @@ class StatsController:
         return summon_odds_list, wanted_profession, hero_1_class
 
 
+    def _optimized_controller(optimized_summon_odds_list):
 
-    def _return_table_header_span_and_table_subheader(self):
-        id_and_cost = ('Normalized ID', 'Summon Cost')
-        summon_rarity = tuple(rarity.capitalize() for rarity in StatsController.summon_rarity)
-        table_subheader = id_and_cost + self.profession_order + self.wanted_stats * 2 + StatsController.other_stats_or_classes + self.wanted_stats + StatsController.other_stats_or_classes + self.wanted_classes + self.indifferent_classes + StatsController.other_stats_or_classes + summon_rarity 
-        table_header_span = (len(id_and_cost), len(self.profession_order), len(self.wanted_stats), len(self.wanted_stats)+1, len(self.wanted_stats)+1, len(self.wanted_classes), len(self.indifferent_classes), len(StatsController.other_stats_or_classes), len(summon_rarity))
+        wrapper = lambda self: {"summon_odds_list": optimized_summon_odds_list(self), "your_hero_num": self.hero_input_form.your_hero.data.split(",")[0], "your_hero_cost": self.hero_input_form.your_hero.data.split(",")[1] if len(self.hero_input_form.your_hero.data.split(",")) > 1 else 0.0, "profession_order": self.profession_order, "wanted_stats": self.wanted_stats, "wanted_classes": self.wanted_classes, "opposing_mutation_classes": self.opposing_mutation_classes}
 
-        return table_header_span, table_subheader
+        return wrapper
 
 
-    def _return_table_rows(self):
-        summon_odds_list_fetch = lambda x: [ tuple(row.get(item[0]).get(item[1], 0) if type(item) == tuple else row.get(item) for row in self.summon_odds_list) for item in x]
-        one_minus = lambda x: [1 - sum(x)]
-        key_subkey_tuple_map = lambda key, lst: map(lambda x: (key, x), lst)
+
+    @_optimized_controller
+    def optimized_summon_odds_list(self):
+        wanted_stats = ("hero_num", "summon_cost", "profession", "purple_stat_boost", "stat_boost2", "stat_boost1", "main_class", "rarity_odds")
+        optimized_key_names = ("hero_num", "summon_cost", "profession", "purple_stat_boost", "blue_stat_boost", "green_stat_boost", "class_odds", "rarity_odds")
+        sub_dict_list = ("profession","purple_stat_boost", "blue_stat_boost", "green_stat_boost", "class_odds", "rarity_odds")
+        optimized_summon_odds_list = [{optimized_key_names[i]: candidate[wanted_stats[i]] for i in range(len(optimized_key_names))} for candidate in self.summon_odds_list]
         
-        dict_keys = ('hero_num', 'summon_cost', 'profession', 'purple_stat_boost', 'stat_boost2', 'stat_boost1', 'main_class', 'rarity_odds')
-        profession_1, profession_2, profession_3, profession_4 = key_subkey_tuple_map('profession', self.profession_order) 
-        purple_stat_1, purple_stat_2 = key_subkey_tuple_map('purple_stat_boost', self.wanted_stats) 
-        blue_stat_1, blue_stat_2 = key_subkey_tuple_map('stat_boost2', self.wanted_stats)
-        green_stat_1, green_stat_2 = key_subkey_tuple_map('stat_boost1', self.wanted_stats)
-        wanted_class_1, wanted_class_2, wanted_class_3 = key_subkey_tuple_map('main_class', self.wanted_classes)
-        indifferent_class_1, indifferent_class_2, indifferent_class_3 = key_subkey_tuple_map('main_class', self.indifferent_classes)
-        common, uncommon, rare, legendary, mythic = key_subkey_tuple_map('rarity_odds' ,StatsController.summon_rarity)
-        row_content_list = ('hero_num', 'summon_cost', profession_1, profession_2, profession_3, profession_4, purple_stat_1, purple_stat_2, blue_stat_1, blue_stat_2, green_stat_1, green_stat_2, wanted_class_1, wanted_class_2, wanted_class_3, indifferent_class_1, indifferent_class_2, indifferent_class_3, common, uncommon, rare, legendary, mythic)
-        table_rows = [[row.get(item[0]).get(item[1],0) if type(item) == tuple else row.get(item) for row in self.summon_odds_list] for item in row_content_list]
+        for parent_dict in optimized_summon_odds_list:
+            for sub_dict in sub_dict_list:
+                for key, value in parent_dict.get(sub_dict).items():
+                    if value:
+                        parent_dict.get(sub_dict)[key] = round(value, 3)
+            
+            wanted_class_and_opposing_mutation_class_odds = 0
 
-        #inserts blue_stat_other, green_stat_other, and other_classes into table_rows
-        table_indexes = {key:row_content_list.index(key) for key in row_content_list}
-        other_stats_or_classes = lambda *x: [1 - sum(items) for items in zip(*map(lambda index: table_rows[index], x))] 
-        blue_stat_other = other_stats_or_classes(table_indexes.get(blue_stat_1), table_indexes.get(blue_stat_2))
-        green_stat_other = other_stats_or_classes(table_indexes.get(green_stat_1), table_indexes.get(green_stat_2))
-        other_classes = other_stats_or_classes(table_indexes.get(wanted_class_1), table_indexes.get(wanted_class_2), table_indexes.get(wanted_class_3), table_indexes.get(indifferent_class_1), table_indexes.get(indifferent_class_2), table_indexes.get(indifferent_class_3))
-        table_rows.insert(table_indexes.get(common), other_classes)
-        table_rows.insert(table_indexes.get(wanted_class_1), green_stat_other)
-        table_rows.insert(table_indexes.get(green_stat_1), blue_stat_other)
+            for key in self.wanted_classes + self.opposing_mutation_classes:
+                wanted_class_and_opposing_mutation_class_odds += parent_dict.get("class_odds").get(key, 0)
 
-        return zip(*table_rows)  
+            lemon_odds = abs(1 - wanted_class_and_opposing_mutation_class_odds)
+            parent_dict.get("class_odds").update({"lemon": round(lemon_odds, 3)})
 
-        
-    def return_table_headers_and_rows(self):
-        table_header = (f'{self.hero_input_form.your_hero.data}\n Summon Candidates and Summoning Cost', 'Profession', 'Purple Stat Odds', 'Blue Stat Odds', 'Green Stat Odds', 'Wanted Class Odds', 'Indifferent Class Odds', 'Other Class Odds', 'Summoning Rarity Odds')
-        table_header_span, table_subheader = self._return_table_header_span_and_table_subheader()
-        header_span_dict = {key:value for key, value in zip(table_header, table_header_span)}
-        table_rows = self._return_table_rows() 
+        return optimized_summon_odds_list
 
-        return(table_header, header_span_dict, table_subheader, table_rows)
-             
+
+            

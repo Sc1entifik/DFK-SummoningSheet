@@ -107,9 +107,3 @@ class HeroGenetics():
 
     def hero_rarity(self):
         return self._hero_rarity
-'''
-your_hero = HeroGenetics(2000000014834)
-rented_hero = HeroGenetics(1000000149421)
-print(your_hero.stats_gene_dictionary())
-print(rented_hero.stats_gene_dictionary())
-'''
