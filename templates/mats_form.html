@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{%extends "base.html"%}
+{% block content %}
+
+<html>
+	<head>
+		<title>Mats Entry Form</title>
+		<link rel="stylesheet" href='{{ url_for("static", filename="css/mats_form.css") }}' />
+	</head>
+	<body>
+		<h1>Mining Profitability Form</h1>
+		<form class="profitability-form" method="POST" action="/mats_form">
+			{{ form.csrf_token }}
+
+
+			<div class="flexbox">
+				<div class="mats-box">
+					<h2>Mining Transaction Cost</h2>
+					<br>
+					<div class="cost-and-eggs-grid">
+						<p>{{ form.kingdom.label }}{{ form.kingdom }}</p>
+						<p>{{ form.transaction_cost.label }}<br>{{ form.transaction_cost(placeholder=0) }}</p>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="flexbox">
+				<div class="mats-box">
+					<h2>Currencies</h2>
+					<br>
+					<div class="currencies-runes-and-tears-grid">
+						<p><img src="{{ url_for("static", filename="images/crystal.png") }}" />{{ form.crystal.label }}<br>{{ form.crystal(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/jewel.png") }}" /> {{ form.jewel.label }}<br>{{ form.jewel(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/gold.png") }}" /> {{ form.gold.label }}<br>{{ form.gold(placeholder=0) }}</p>
+					</div>
+				</div>
+				
+				<div class="mats-box">
+					<h2>Tears And Runes</h2>
+					<br>
+					<div class="currencies-runes-and-tears-grid">
+						<p><img src="{{ url_for("static", filename="images/gaias_tear.png") }}" />{{ form.tears.label }}<br>{{ form.tears(placeholder=0) }} </p>
+						<p><img src="{{ url_for("static", filename="images/shvas_rune.png") }}" /> {{ form.shvas_runes.label }}<br>{{ form.shvas_runes(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/moksha_rune.png") }}"/> {{ form.moksha_runes.label }}<br>{{ form.moksha_runes(placeholder=0) }} </p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="flexbox">
+
+					<div class="mats-box">
+					<h2>Eggs</h2>
+					<br>
+					<div class="cost-and-eggs-grid">
+						<p><img src="{{ url_for("static", filename="images/blue_egg.png") }}" />{{ form.blue_egg.label }}<br>{{ form.blue_egg(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/grey_egg.png") }}" />{{ form.grey_egg.label }}<br>{{ form.grey_egg(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/green_egg.png") }}" /> {{ form.green_egg.label }}<br>{{ form.green_egg(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/yellow_egg.png") }}" /> {{ form.yellow_egg.label }}<br>{{ form.yellow_egg(placeholder=0) }}</p>
+					</div>
+				</div>
+
+				<div class="mats-box">
+					<h2>Stones</h2>
+					<br>
+					<div class="stones-grid">
+						<p><img src="{{ url_for("static", filename="images/str_stone.png") }}" /> {{ form.might_stone.label }}<br>{{ form.might_stone(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/dex_stone.png") }}" /> {{ form.finesse_stone.label }}<br>{{ form.finesse_stone(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/agi_stone.png") }}" /> {{ form.swiftness_stone.label }}<br>{{ form.swiftness_stone(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/vit_stone.png") }}" />{{ form.vigor_stone.label }}<br>{{ form.vigor_stone(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/end_stone.png") }}"/> {{ form.fortitude_stone.label }}<br>{{ form.fortitude_stone(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/int_stone.png") }}" /> {{ form.wit_stone.label }}<br>{{ form.wit_stone(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/wis_stone.png") }}" /> {{ form.insight_stone.label }}<br>{{ form.insight_stone(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/lck_stone.png") }}"/> {{ form.fortune_stone.label }}<br>{{ form.fortune_stone(placeholder=0) }}</p>
+					</div>
+				</div>
+			</div>
+			
+
+			<div class="flexbox">
+				<div class="mats-box">
+					<h2>Fish</h2>
+					<br>
+					<div class="fish-and-plants-grid">
+						<p><img src="{{ url_for("static", filename="images/bloater.png") }}" /> {{ form.bloater.label }}<br>{{ form.bloater(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/frost_bloater.png") }}" /> {{ form.frost_bloater.label }}<br>{{ form.frost_bloater(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/ironscale.png") }}" />{{ form.ironscale.label }}<br>{{ form.ironscale(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/lantern-eye.png") }}" /> {{ form.lantern_eye.label }}<br>{{ form.lantern_eye(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/redgill.png") }}" />{{ form.redgill.label }}<br>{{ form.redgill(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/speckletail.png") }}" /> {{ form.speckle_tail.label }}<br>{{ form.speckle_tail(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/silverfin.png") }}" /> {{ form.silverfin.label }}<br>{{ form.silverfin(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/three-eyed_eel.png") }}" /> {{ form.three_eyed_eel.label }}<br>{{ form.three_eyed_eel(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/sailfish.png") }}" /> {{ form.sailfish.label }}<br>{{ form.sailfish(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/king_pincer.png") }}" /> {{ form.king_pincer.label }}<br>{{ form.king_pincer(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/shimmerskin.png") }}" />{{ form.shimmerskin.label }}<br>{{ form.shimmerskin(placeholder=0) }}</p>
+					</div>
+				</div>
+
+				<div class="mats-box">
+					<h2>Plants</h2>
+					<br>
+					<div class="fish-and-plants-grid">
+						<p><img src="{{ url_for("static", filename="images/ragweed.png") }}" /> {{ form.ragweed.label }}<br>{{ form.ragweed(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/frost_drum.png") }}"/> {{ form.frost_drum.label }}<br>{{ form.frost_drum(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/bluestem.png") }}" /> {{ form.bluestem.label}}<br>{{ form.bluestem(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/redleaf.png") }}" /> {{ form.redleaf.label }}<br>{{ form.redleaf(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/knaproot.png") }}" />  {{ form.knaproot.label }}<br>{{ form.knaproot(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/milkweed.png") }}" /> {{ form.milkweed.label }}<br>{{ form.milkweed(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/goldvein.png") }}" /> {{ form.goldvein.label }}<br>{{ form.goldvein(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/shaggy_cap.png") }}" /> {{ form.shaggy_cap.label }}<br>{{ form.shaggy_cap(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/spiderfruit.png") }}" /> {{ form.spiderfruit.label }}<br>{{ form.spiderfruit(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/rockroot.png") }}" /> {{ form.rockroot.label }}<br>{{ form.rockroot(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/darkweed.png") }}" /> {{ form.darkweed.label }}<br>{{ form.darkweed(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/ambertaffy.png") }}" /> {{ form.ambertaffy.label }}<br>{{ form.ambertaffy(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/swift-thistle.png") }}" /> {{ form.swift_thistle.label }}<br>{{ form.swift_thistle(placeholder=0) }}</p>
+						<p><img src="{{ url_for("static", filename="images/skunkshade.png") }}" /> {{ form.skunkshade.label }}<br>{{ form.skunkshade(placeholder=0) }}</p>
+												
+					</div>
+				</div>
+
+			</div>
+			<button class="submit" type="submit">Submit</button>
+		</form>
+	</body>
+
+</html>
+
+{% endblock %}
+
