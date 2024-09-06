@@ -4,6 +4,7 @@
 	{% block content %}
 	<head>
 		<link rel="stylesheet" href='{{ url_for("static", filename="css/summon_sheet.css") }}'/>
+		<link rel="stylesheet" href='{{ url_for("static", filename="css/summon_sheet_media.css") }}'/>
 	</head>
 
 	<h2 class="odds-disclaimer">All odds are displayed in decimal format.</h2>
@@ -21,10 +22,10 @@
 
 		<h5 class="stat-subheader">ID</h5>
 		<h5 class="stat-subheader">Cost</h5>
-		<h5 class="multi-stat-subheader">{{ controller.get("profession_order")[0] }} {{ controller.get("profession_order")[1] }} {{ controller.get("profession_order")[2] }} {{ controller.get("profession_order")[3] }}</h5>
-		<h5 class="multi-stat-subheader">{{  controller.get("wanted_stats")[0] }} {{  controller.get("wanted_stats")[1] }}</h5>
-		<h5 class="multi-stat-subheader">{{  controller.get("wanted_stats")[0] }} {{  controller.get("wanted_stats")[1] }}</h5>
-		<h5 class="multi-stat-subheader">{{  controller.get("wanted_stats")[0] }} {{  controller.get("wanted_stats")[1] }}</h5>
+		<h5 class="multi-stat-subheader">{{ controller.get("subheader_dictionary").get(controller.get("profession_order")[0]) }} {{ controller.get("subheader_dictionary").get(controller.get("profession_order")[1]) }} {{ controller.get("subheader_dictionary").get(controller.get("profession_order")[2]) }} {{ controller.get("subheader_dictionary").get(controller.get("profession_order")[3]) }}</h5>
+		<h5 class="multi-stat-subheader">{{  controller.get("subheader_dictionary").get(controller.get("wanted_stats")[0]) }} {{  controller.get("subheader_dictionary").get(controller.get("wanted_stats")[1]) }}</h5>
+		<h5 class="multi-stat-subheader">{{  controller.get("subheader_dictionary").get(controller.get("wanted_stats")[0]) }} {{  controller.get("subheader_dictionary").get(controller.get("wanted_stats")[1]) }}</h5>
+		<h5 class="multi-stat-subheader">{{  controller.get("subheader_dictionary").get(controller.get("wanted_stats")[0]) }} {{  controller.get("subheader_dictionary").get(controller.get("wanted_stats")[1]) }}</h5>
 
 		{% for candidate in controller.summon_odds_list  %}
 		<p class="candidate-stats">{{ candidate.get("hero_num") }}</p>

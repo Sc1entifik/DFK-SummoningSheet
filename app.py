@@ -1,7 +1,8 @@
 from flask import Flask, render_template, redirect, url_for
 
 from forms import HeroInputForm, MatsInputForm
-from controller import StatsController
+from dexscreener_api import DexscreenerDatabaseManager
+from controller import StatsController, MatsController
 
 app = Flask(__name__)
 app.secret_key = "ieropajdklsagnfjklghrkjlffjdklasfjkdsa;"
@@ -30,8 +31,17 @@ def mats_form():
     form = MatsInputForm()
 
     if form.validate_on_submit():
-        bloater = form.transaction_cost
-        print(bloater)
+        mats_price_object = DexscreenerDatabaseManager()
+        print("I triggered")
+
+        if mats_price_object.is_update_time():
+            mats_price_object.update_database_prices()
+
+        #mining_results_controller = MatsController(form, mats_price_object.dexscreener_dfk_mats_dictionary)
+
+        #return render_template("material_mining_results.html", price_object=mining_results_controller.price_and_quantity_dict())
+
+
 
     return render_template("mats_form.html", form=form)
 

@@ -37,6 +37,7 @@ class InitializeDexscreenerJsonDatabase(DexscreenerStaticValues):
     
 
 class DexscreenerDatabaseManager(DexscreenerStaticValues): 
+
     def __init__(self):
         self.dexscreener_dfk_mats_dictionary = self._load_dexscreener_dictionary()
 
@@ -66,12 +67,15 @@ class DexscreenerDatabaseManager(DexscreenerStaticValues):
         mats_not_updated = (mat for mat in self.dexscreener_dfk_mats_dictionary.keys() if not updated_prices.get(mat))
         
         for mat in mats_not_updated:
-            if mat != "last_updated":
+            if mat != "last_updated": # "last_updated" key provides the datetime of the last time the database was updated. The rest of the keys return a mat.
                 self.dexscreener_dfk_mats_dictionary.get(mat)["updated_at_last_update"] = False
 
         for mat in updated_prices.keys():
             self.dexscreener_dfk_mats_dictionary.get(mat)["price_native"] = updated_prices.get(mat)
             self.dexscreener_dfk_mats_dictionary.get(mat)["updated_at_last_update"] = True
+
+        self.dexscreener_dfk_mats_dictionary["last_updated"] = datetime().now().strftime(self.DATABASE_DATETIME_FORMAT)
+
 
         with open(DexscreenerDatabaseManager.DEXSCREENER_DATABASE_FILEPATH, "w") as dexscreener_database:
             json.dump(self.dexscreener_dfk_mats_dictionary, dexscreener_database)

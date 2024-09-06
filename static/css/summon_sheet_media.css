@@ -1,0 +1,125 @@
+/* original stats:
+.multi-stat-subheader {
+font-size: 1.2rem;
+word-spacing: 1.5rem;
+}
+
+.stat-header {
+font-size: 1.5rem;
+}
+
+.stat-subheader {
+font-size: 1.2rem;
+}
+
+.candidate-stats {
+font-size: .85rem;
+word-spacing: 1.5rem;
+}
+*/
+
+@media screen and (max-width: 720px) {
+
+	.stat-header {
+		font-size: 1.3rem;
+	}
+	.candidate-stats {
+		word-spacing: .5rem;
+	}
+
+	.multi-stat-subheader {
+		word-spacing: .2rem;
+	}
+}
+
+/*
+@media screen and (max-width: 1280px) {
+	.stat-header {
+		font-size: 1.1rem;
+	}
+
+	.multi-stat-subheader {
+		font-size: .8rem;
+	}
+
+	.stat-subheader {
+		font-size: .8rem;
+	}
+
+	.candidate-stats {
+		font-size: .65rem;
+	}
+}
+
+@media screen and (max-width: 1105px) {
+	.stat-header {
+		font-size: 1rem;
+	}
+
+	.multi-stat-subheader {
+		font-size: .6rem;
+		word-spacing: 1.3rem;
+	}
+
+	.stat-subheader {
+		font-size: .6rem;
+	}
+
+	.candidate-stats {
+		font-size: .45rem;
+	}
+}
+
+@media screen and (max-width: 592px) {
+	.stat-header {
+		font-size: .9rem;
+	}
+
+	.multi-stat-subheader {
+		font-size: .5rem;
+	}
+
+	.stat-subheader {
+		font-size: .5rem;
+	}
+
+	.candidate-stats {
+		font-size: .35rem;
+	}
+}
+
+@media screen and (max-width: 430px) {
+	.stat-header {
+		font-size: .8rem;
+	}
+
+	.multi-stat-subheader {
+		font-size: .4rem;
+	}
+
+	.stat-subheader {
+		font-size: .4rem;
+	}
+
+	.candidate-stats {
+		font-size: .25rem;
+	}
+}
+
+@media screen and (max-width: 382px) {
+	.multi-stat-subheader {
+		font-size: .3rem;
+	}
+
+	.stat-subheader {
+		font-size: .3rem;
+	}
+}
+
+
+@media screen and (max-width: 320px) {
+	.multi-stat-subheader {
+		word-spacing: 1.1rem;
+	}
+}
+*/

@@ -1,6 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=MedievalSharp");
 
 
+@media screen and (max-width: 944px) {
+	html {
+		font-size: 12px;
+	}
+}
+
+@media screen and (max-width: 605px) {
+	html {
+		font-size: 10px;
+	}
+}
+
+
 html {
 	background-color: hsl(270, 87%, 7%);/* Royal Purple */
 	font-family: "MedievalSharp";

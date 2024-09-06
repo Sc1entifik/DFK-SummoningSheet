@@ -1,6 +1,6 @@
 from summoning_stat_calculations import SummonStatistics
 
-def return_class_header_dictionary():
+def class_header_dictionary():
     class_list = SummonStatistics.full_class_list
     result_list = [(('Paladin', 'Warrior', 'Knight'), ('DarkKnight', 'Archer', 'Thief')), (('DarkKnight', 'Thief', 'Archer'), ('Paladin', 'Warrior', 'Knight')), (('Ninja', 'Monk', 'Pirate'), ('Summoner', 'Priest', 'Wizard')), (('Summoner', 'Priest', 'Wizard'), ('Ninja', 'Monk', 'Pirate')), (('Shapeshifter', 'Berserker', 'Seer'), ('Bard', 'Legionnaire', 'Scholar')), (('Bard', 'Legionnaire', 'Scholar'), ('Shapeshifter', 'Berserker', 'Seer')), (('Dragoon', 'Paladin', 'DarkKnight'), ('Sage', 'Ninja', 'Summoner')),  (('Sage', 'Summoner', 'Ninja'), ('SpellBow', 'Seer', 'Legionnaire')), (('SpellBow', 'Shapeshifter', 'Bard'), ('Sage', 'Summoner', 'Ninja')), (('SpellBow', None, None), ('Paladin', 'DarkKnight', None)), (('DreadKnight', 'Dragoon', 'Sage'), ('SpellBow', None, None)), (('DreadKnight', 'Dragoon', 'Sage'), ('SpellBow', None, None))]
     i = len(result_list) - 1
@@ -13,7 +13,7 @@ def return_class_header_dictionary():
 
 
 class StatsController:
-    wanted_classes_dictionary = return_class_header_dictionary()
+    wanted_classes_dictionary = class_header_dictionary()
     wanted_stats_dictionary = {'Mining': ('Strength', 'Endurance'), 'Fishing': ('Agility', 'Luck'), 'Foraging': ('Dexterity', 'Intelligence'), 'Gardening': ('Wisdom', 'Vitality')}
     profession_order_dictionary = {'Mining': ('Mining', 'Foraging', 'Fishing', 'Gardening'), 'Foraging': ('Foraging', 'Gardening', 'Fishing', 'Mining'), 'Gardening': ('Gardening', 'Foraging', 'Fishing', 'Mining'),'Fishing': ('Fishing','Mining','Foraging','Gardening')}
     other_stats_or_classes = ('Other',)
@@ -22,14 +22,14 @@ class StatsController:
     
     def __init__(self, hero_input_form):
         self.hero_input_form = hero_input_form
-        self.summon_odds_list, self.wanted_profession, self.your_hero_class = self._return_summon_statistics_data()
+        self.summon_odds_list, self.wanted_profession, self.your_hero_class = self._summon_statistics_data()
         self.profession_order = StatsController.profession_order_dictionary.get(self.wanted_profession)
         self.wanted_stats = StatsController.wanted_stats_dictionary.get(self.wanted_profession)
         self.wanted_classes = StatsController.wanted_classes_dictionary.get(self.your_hero_class)[0]
         self.opposing_mutation_classes = StatsController.wanted_classes_dictionary.get(self.your_hero_class)[1]
         
 
-    def _return_hero_number_with_realm_prefix(self, hero_num, your_hero = False):
+    def _hero_number_with_realm_prefix(self, hero_num, your_hero = False):
         your_hero_prefix = '1' if self.hero_input_form.your_hero_realm.data == 'Crystalvale' else '2'
         candidate_hero_prefix = '1' if hero_num in (hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.cv_candidate_list.data.split()) else '2'
         prefix = your_hero_prefix if your_hero == True else candidate_hero_prefix
@@ -43,7 +43,7 @@ class StatsController:
         return int(prefix + padding + str(hero_num))
 
 
-    def _return_candidate_summon_cost_list(self):
+    def _candidate_summon_cost_list(self):
         sd_candidate_costs = (float(hero_and_cost.split(",", 1)[1]) if len(hero_and_cost.split(",", 1)) == 2 else 0 for hero_and_cost in self.hero_input_form.sd_candidate_list.data.split())
         cv_candidate_costs = (float(hero_and_cost.split(",", 1)[1]) if len(hero_and_cost.split(",", 1)) == 2 else 0 for hero_and_cost in self.hero_input_form.cv_candidate_list.data.split())
         sd_2_candidate_costs = (float(hero_and_cost.split(",", 1)[1]) if len(hero_and_cost.split(",", 1)) == 2 else 0 for hero_and_cost in self.hero_input_form.sd_2_candidate_list.data.split())
@@ -51,11 +51,11 @@ class StatsController:
         return tuple(sd_candidate_costs) + tuple(cv_candidate_costs) + tuple(sd_2_candidate_costs)
 
 
-    def _return_summon_statistics_data(self):
+    def _summon_statistics_data(self):
         candidate_normalized_id_list = ([hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.sd_candidate_list.data.split()] + [hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.cv_candidate_list.data.split()] + [hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.sd_2_candidate_list.data.split()])
-        candidate_id_list = (tuple(hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.sd_candidate_list.data.split()) + tuple(map(self._return_hero_number_with_realm_prefix, (hero_and_cost.split("," ,1)[0] for hero_and_cost in self.hero_input_form.cv_candidate_list.data.split()))) + tuple(map(self._return_hero_number_with_realm_prefix, (hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.sd_2_candidate_list.data.split()))))
-        candidate_summon_costs_list = self._return_candidate_summon_cost_list()
-        your_hero = self.hero_input_form.your_hero.data.split(",", 1)[0] if self.hero_input_form.your_hero_realm.data == 'Serendale' else self._return_hero_number_with_realm_prefix(self.hero_input_form.your_hero.data.split(",", 1)[0], your_hero = True)
+        candidate_id_list = (tuple(hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.sd_candidate_list.data.split()) + tuple(map(self._hero_number_with_realm_prefix, (hero_and_cost.split("," ,1)[0] for hero_and_cost in self.hero_input_form.cv_candidate_list.data.split()))) + tuple(map(self._hero_number_with_realm_prefix, (hero_and_cost.split(",", 1)[0] for hero_and_cost in self.hero_input_form.sd_2_candidate_list.data.split()))))
+        candidate_summon_costs_list = self._candidate_summon_cost_list()
+        your_hero = self.hero_input_form.your_hero.data.split(",", 1)[0] if self.hero_input_form.your_hero_realm.data == 'Serendale' else self._hero_number_with_realm_prefix(self.hero_input_form.your_hero.data.split(",", 1)[0], your_hero = True)
         your_hero_summon_cost = float(self.hero_input_form.your_hero.data.split(",", 1)[1]) if len(self.hero_input_form.your_hero.data.split(",", 1)) == 2 else 0 
         summon_statistics_list = [SummonStatistics(your_hero, candidate) for candidate in candidate_id_list]
         summon_odds_list = [stats_dict.summon_stats_genetics_dictionary() for stats_dict in summon_statistics_list]
@@ -73,9 +73,26 @@ class StatsController:
         return summon_odds_list, wanted_profession, hero_1_class
 
 
+    def _subheader_dictionary(self):
+        return {
+            "Gardening": "Gard",
+            "Foraging": "Forg",
+            "Fishing": "Fish",
+            "Mining": "Mine",
+            "Strength": "STR",
+            "Dexterity": "DEX",
+            "Agility": "AGI",
+            "Vitality": "VIT",
+            "Endurance": "END",
+            "Intelligence": "INT",
+            "Wisdom": "WIS",
+            "Luck": "LCK"
+        }
+    
+
     def _optimized_controller(optimized_summon_odds_list):
 
-        wrapper = lambda self: {"summon_odds_list": optimized_summon_odds_list(self), "your_hero_num": self.hero_input_form.your_hero.data.split(",")[0], "your_hero_cost": self.hero_input_form.your_hero.data.split(",")[1] if len(self.hero_input_form.your_hero.data.split(",")) > 1 else 0.0, "profession_order": self.profession_order, "wanted_stats": self.wanted_stats, "wanted_classes": self.wanted_classes, "opposing_mutation_classes": self.opposing_mutation_classes}
+        wrapper = lambda self: {"summon_odds_list": optimized_summon_odds_list(self), "your_hero_num": self.hero_input_form.your_hero.data.split(",")[0], "your_hero_cost": self.hero_input_form.your_hero.data.split(",")[1] if len(self.hero_input_form.your_hero.data.split(",")) > 1 else 0.0, "subheader_dictionary": self._subheader_dictionary(), "profession_order": self.profession_order, "wanted_stats": self.wanted_stats, "wanted_classes": self.wanted_classes, "opposing_mutation_classes": self.opposing_mutation_classes}
 
         return wrapper
 
@@ -105,4 +122,23 @@ class StatsController:
         return optimized_summon_odds_list
 
 
-            
+
+
+class MatsController:
+
+
+    def __init__(self, form, mats_price_object):
+        self.form: dict = form
+        self._mats_price_object: dict = mats_price_object
+        self.profits_dictionary = self._get_profits_dictionary()
+
+
+    def _get_profits_dictionary(self):
+        profits_keys = self.form.keys()
+
+        return (tuple(profits_keys), tuple(self._mats_price_object.keys()))
+
+
+
+    
+
