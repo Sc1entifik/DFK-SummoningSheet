@@ -3,6 +3,7 @@
 	justify-content: space-evenly;
 	gap: 6rem;
 	margin-bottom: 5rem;
+	margin-right: 1.5rem;
 }
 
 
@@ -17,47 +18,13 @@
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	justify-items: center;
 	justify-content: stretch;
-	column-gap: 1.5rem;
+	column-gap: .75rem;
 }
 
-
-.currencies-runes-and-tears-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	justify-items: center;
-	justify-content: stretch;
-	column-gap: 1.5rem;
-}
-
-
-.eggs-grid {
-	display: grid;
-	grid-template-columns: 1fr;
-	justify-items: auto;
-	justify-content: stretch;
-	column-gap: 1.5rem;
-}
-
-.crystals-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	justify-items: auto;
-	justify-content: stretch;
-	column-gap: 1.5rem;
-}
-
-
-.fish-and-plants-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	justify-items: auto;
-	justify-content: stretch;
-	column-gap: 1.5rem;
-}
 
 .profits-header {
-	font-size: 2rem;
-	color: hsl(120, 87%, 35%);
+	font-size: 1.7rem;
+	color: hsl(120, 87%, 35%); /* Lime Green */
 }
 
 
@@ -68,7 +35,7 @@ img {
 
 
 .flexbox p {
-	color: hsl(120, 87%, 35%);
+	color: hsl(60, 87%, 87%); /* White Gold */
 	font-size: 1.5rem;
 }
 

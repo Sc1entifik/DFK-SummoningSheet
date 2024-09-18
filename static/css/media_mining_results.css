@@ -1,0 +1,29 @@
+@media screen and (max-width: 690px) {
+	html{
+		font-size: 10px;
+	}
+}
+
+@media screen and (max-width: 540px) {
+	html {
+		font-size: 8px;
+	}
+
+	.flexbox {
+		gap: 4rem;
+	}
+}
+
+
+@media screen and (max-width: 400px) {
+	html {
+		font-size: 6px;
+	}
+
+	img {
+		height: 2.7rem;
+		width: 2.7rem;
+	}
+
+
+}

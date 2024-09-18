@@ -128,10 +128,13 @@ v-1.95
 - Built mining_results.css
 - Built media_mining_results.css
 
+v-1.952
+- Created media quearies for mining_results.html
+- Minor tweaks to mining_results.html and mining_results.css including p tag color change.
+
+
 Things I'm working on for future updates / pseudo coding:
-- Build the front end routes for the material mining profitablility portion of the site
 - Build the instructions page for the material mining profitability tool.
 - Revamp front end for better styling and visibility.
-- Add media query/queries to resize all relative sizing units to fit all screen types.
 - Fix bug where whitespace is not trimmed from entry forms.
-- Look into getting some tests written
+- Writing some tests so project remains scalable.
