@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block content %}
+
+<html>
+	<head>
+		<link rel="stylesheet" href='{{ url_for("static", filename="css/mining_results.css") }}' />
+	</head>
+
+	<body>
+		<h1>Mining Profitability Results</h1>
+
+		<div class="flexbox">
+			<p>Transaction Costs<br/><img src={{ controller.transaction_currency_image_source }}/>{{ controller.form.transaction_cost.data }}</p>
+			<p>Materials Value<br/><img src={{ controller.transaction_currency_image_source }}/>{{ controller.total_mats_profit.get("materials_total") }}</p>
+				<p>Total Profit<br/><img src={{ controller.transaction_currency_image_source }}/>{{ controller.total_profit }}</p>
+		</div>
+
+
+		<div class="flexbox">
+			<div class="mats-box">
+				<h2>Currencies</h2>
+
+				<div class="profits-grid">
+					<h3 class="profits-header"></h3>
+					<h3 class="profits-header">Quantity</h3>
+					<h3 class="profits-header">Price in {{controller.transaction_currency}}</h3>
+					<h3 class="profits-header">Total Value</h3>
+					{% for display_dict in controller.display_dict_map(controller.CURRENCIES) %} 
+					<p><img src={{ display_dict.get("image_source") }}/></p>
+					<p>{{ display_dict.get("item_quantity") }}</p>
+					<p>{{ display_dict.get("item_price") }}</p>
+					<p>{{ display_dict.get("item_profit") }}</p>
+					{% endfor %}
+				</div>
+			</div>
+
+
+			<div class="mats-box">
+				<h2>Tears And Runes</h2>
+
+				<div class="profits-grid">
+					<h3 class="profits-header"></h3>
+					<h3 class="profits-header">Quantity</h3>
+					<h3 class="profits-header">Price in {{controller.transaction_currency}}</h3>
+					<h3 class="profits-header">Total Value</h3>
+					{% for display_dict in controller.display_dict_map(controller.TEARS_AND_RUNES) %} 
+					<p><img src={{ display_dict.get("image_source") }}/></p>
+					<p>{{ display_dict.get("item_quantity") }}</p>
+					<p>{{ display_dict.get("item_price") }}</p>
+					<p>{{ display_dict.get("item_profit") }}</p>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		
+
+		<div class="flexbox">
+			<div class="mats-box">
+				<h2>Eggs</h2>
+
+				<div class="profits-grid">
+					<h3 class="profits-header"></h3>
+					<h3 class="profits-header">Quantity</h3>
+					<h3 class="profits-header">Price in {{controller.transaction_currency}}</h3>
+					<h3 class="profits-header">Total Value</h3>
+					{% for display_dict in controller.display_dict_map(controller.EGGS) %} 
+					<p><img src={{ display_dict.get("image_source") }}/></p>
+					<p>{{ display_dict.get("item_quantity") }}</p>
+					<p>{{ display_dict.get("item_price") }}</p>
+					<p>{{ display_dict.get("item_profit") }}</p>
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="mats-box">
+				<h2>Crystals</h2>
+
+				<div class="profits-grid">
+					<h3 class="profits-header"></h3>
+					<h3 class="profits-header">Quantity</h3>
+					<h3 class="profits-header">Price in {{controller.transaction_currency}}</h3>
+					<h3 class="profits-header">Total Value</h3>
+					{% for display_dict in controller.display_dict_map(controller.CRYSTALS) %} 
+					<p><img src={{ display_dict.get("image_source") }}/></p>
+					<p>{{ display_dict.get("item_quantity") }}</p>
+					<p>{{ display_dict.get("item_price") }}</p>
+					<p>{{ display_dict.get("item_profit") }}</p>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+
+
+		<div class="flexbox">
+			<div class="mats-box">
+				<h2>Fish</h2>
+
+				<div class="profits-grid">
+					<h3 class="profits-header"></h3>
+					<h3 class="profits-header">Quantity</h3>
+					<h3 class="profits-header">Price in {{controller.transaction_currency}}</h3>
+					<h3 class="profits-header">Total Value</h3>
+					{% for display_dict in controller.display_dict_map(controller.FISH) %} 
+					<p><img src={{ display_dict.get("image_source") }}/></p>
+					<p>{{ display_dict.get("item_quantity") }}</p>
+					<p>{{ display_dict.get("item_price") }}</p>
+					<p>{{ display_dict.get("item_profit") }}</p>
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="mats-box">
+				<h2>Plants</h2>
+
+				<div class="profits-grid">
+					<h3 class="profits-header"></h3>
+					<h3 class="profits-header">Quantity</h3>
+					<h3 class="profits-header">Price in {{controller.transaction_currency}}</h3>
+					<h3 class="profits-header">Total Value</h3>
+					{% for display_dict in controller.display_dict_map(controller.PLANTS) %} 
+					<p><img src={{ display_dict.get("image_source") }}/></p>
+					<p>{{ display_dict.get("item_quantity") }}</p>
+					<p>{{ display_dict.get("item_price") }}</p>
+					<p>{{ display_dict.get("item_profit") }}</p>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+{% endblock %}

@@ -11,7 +11,7 @@ def dexscreener_object():
 
 @pytest.fixture
 def full_mats_list():
-    return DexscreenerStaticValues.FISH_LIST + DexscreenerStaticValues.PLANT_LIST + DexscreenerStaticValues.STONES_LIST + DexscreenerStaticValues.TEARS_AND_EGGS_LIST + DexscreenerStaticValues.CURRENCIES
+    return DexscreenerStaticValues.FISH_LIST + DexscreenerStaticValues.PLANT_LIST + DexscreenerStaticValues.CRYSTAL_LIST + DexscreenerStaticValues.TEARS_AND_EGGS_LIST + DexscreenerStaticValues.CURRENCIES
 
 
 @pytest.mark.skip #Only run this when your dexscreener_database_file is backed up. When this method is ran some 0xaddresses and prices may be missing because Dexscreener doesn't seem to have all mats at all times or days.

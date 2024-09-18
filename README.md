@@ -1,7 +1,9 @@
-# DFK-SummoningSheet
+# DFK-Summoning Sheet
 
 The purpose of this project is to create a website that will provide you the summoning data for your hero and all the heros you could summon with that hero to get a side by side comparisson to find the best possible summon for that hero as opposed to only being able to see the data for one summon at a time. 
 
+## DFK-Mining Profitability Tool
+This project allows players to see how much they are profiting or losing by mining with their heroes. This could have been a stand alone webpage and project but it goes so well with the summoning sheet I decided to put everything together on one site.
 
 ## Included Files
 Files included in this project include but are not limited to.

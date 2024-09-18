@@ -5,11 +5,6 @@
 	margin-bottom: 5rem;
 }
 
-.cost-box {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
 
 .mats-box {
 	display: flex;
@@ -17,10 +12,20 @@
 }
 
 
+.profits-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	justify-items: center;
+	justify-content: stretch;
+	column-gap: 1.5rem;
+}
+
+
 .currencies-runes-and-tears-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	justify-items: center;
+	justify-content: stretch;
 	column-gap: 1.5rem;
 }
 
@@ -50,44 +55,20 @@
 	column-gap: 1.5rem;
 }
 
-
-.submit {
-	margin-left: calc(50% - 5rem);
-	background-color: hsl(120, 87%, 15%); /*Forest Green*/
-	color: hsl(60, 87%, 87%); /*White Gold*/
-	height: 3rem;
-	width: 10rem;
-	border-radius: 0.3rem;
-	cursor: pointer;
-	font-size: 1.5rem;
+.profits-header {
+	font-size: 2rem;
+	color: hsl(120, 87%, 35%);
 }
 
-ul {
-	list-style-type: none;
-}
-
-li {
-	color: hsl(120,87%,35%);
-	font-size: 1.5rem;
-}
 
 img {
 	height: 4rem;
 	width: 4rem;
 }
 
-input {
-	width: 8ch;
-	height: 2ch;
-}
 
-
-.flexbox, .cost-box p {
+.flexbox p {
 	color: hsl(120, 87%, 35%);
 	font-size: 1.5rem;
-}
-
-.form-subheader {
-	font-size: 2.3rem;
 }
 

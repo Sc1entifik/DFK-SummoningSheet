@@ -1,0 +1,56 @@
+@media screen and (max-width: 530px) {
+
+	.flexbox {
+		justify-content: space-around;
+		gap: 8rem;
+	}
+
+	.currencies-runes-and-tears-grid {
+		grid-template-columns: 1fr 1fr;
+		column-gap: 0.85rem;
+	}
+
+	.fish-and-plants-grid {
+		grid-template-columns: 1fr 1fr;
+		column-gap: 0.85rem;
+	}
+
+	.eggs-grid {
+		grid-template-columns: 1fr;
+		column-gap: 0.85rem;
+	}
+
+	.crystals-grid {
+		justify-content: space-evenly;
+		column-gap: 0.85rem;
+	}
+
+	.profitability-form {
+		margin-left: 1.5rem;
+		margin-right: 2.3rem;
+
+	}
+
+	img {
+		height: 3rem;
+		width: 3rem;
+	}
+}
+
+
+@media screen and (max-width: 390px) {
+	.flexbox {
+		gap: 4rem;
+	}
+
+	img {
+		height: 2.5rem;
+		width: 2.5rem;
+	}
+}
+
+@media screen and (max-width: 365px) {
+	html {
+		font-size: 8px;
+	}
+}

@@ -114,6 +114,20 @@ v-1.8
 - Revamped summon_sheet.html to display data with a .css grid instead of a table layout.
 - Huge modifications to summon_sheet.css to reflect new grid layout.
 
+
+v-1.9
+- Changed CSS for Summoning Sheet part of app.
+- Added media queries.
+- Added _stats_subheader_dictionary to controller.py to change stats layout.
+
+v-1.95
+- Built controller for the mats-profitability form to get the profitability data from the dexscreener api.
+- Created media queries to make mats input form look good on any device.
+- Made random improvements to codebase.
+- Built mining_results.html
+- Built mining_results.css
+- Built media_mining_results.css
+
 Things I'm working on for future updates / pseudo coding:
 - Build the front end routes for the material mining profitablility portion of the site
 - Build the instructions page for the material mining profitability tool.

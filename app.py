@@ -32,14 +32,13 @@ def mats_form():
 
     if form.validate_on_submit():
         mats_price_object = DexscreenerDatabaseManager()
-        print("I triggered")
 
         if mats_price_object.is_update_time():
             mats_price_object.update_database_prices()
 
-        #mining_results_controller = MatsController(form, mats_price_object.dexscreener_dfk_mats_dictionary)
 
-        #return render_template("material_mining_results.html", price_object=mining_results_controller.price_and_quantity_dict())
+        mining_results_controller = MatsController(form, mats_price_object.dexscreener_dfk_mats_dictionary)
+        return render_template("mining_results.html", controller=mining_results_controller)
 
 
 

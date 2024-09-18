@@ -122,23 +122,51 @@ class StatsController:
         return optimized_summon_odds_list
 
 
-
-
 class MatsController:
+    CURRENCIES = ("crystal", "jewel", "gold")
+    TEARS_AND_RUNES = ("tears", "shvas_rune", "moksha_rune")
+    EGGS = ("blue_egg", "grey_egg", "green_egg", "yellow_egg")
+    CRYSTALS = ("might_crystal", "swiftness_crystal", "fortitude_crystal", "insight_crystal", "finesse_crystal", "vigor_crystal", "wit_crystal", "fortune_crystal")
+    FISH = ("bloater","ironscale","lantern_eye","redgill","silverfin","sailfish","shimmerskin","frost_bloater","speckle_tail","three_eyed_eel","king_pincer")
+    PLANTS = ("ragweed","rockroot","redleaf","darkweed","ambertaffy","goldvein","swift_thistle","frost_drum","knaproot","shaggy_cap","skunkshade","bluestem","spiderfruit","milkweed")
+
+    def __init__(self, form, mats_prices_dict):
+        self.form = form
+        self.transaction_currency = "jewel" if self.form.kingdom.data == "Crystalvale" else "klay"
+        self.transaction_currency_image_source = f"../static/images/{self.transaction_currency}.png"
+        self._mats_prices_dict = mats_prices_dict
+        self.price_dictionary = self._price_key_conversion_dictionary()
+        self.total_mats_profit = self._total_profits() 
+        self.total_profit = round(self.total_mats_profit.get("materials_total") - self.form.transaction_cost.data, 5)
 
 
-    def __init__(self, form, mats_price_object):
-        self.form: dict = form
-        self._mats_price_object: dict = mats_price_object
-        self.profits_dictionary = self._get_profits_dictionary()
+    # Converts the _mats_prices_dict to use the same keys as self.form.mats_keys
+    def _price_key_conversion_dictionary(self):
+        jewel_price = lambda x: round(float(self._mats_prices_dict.get(x).get("price_native")), 5)
+        klay_price = lambda x: round(jewel_price(x) / round(float(self._mats_prices_dict.get("klay").get("price_native")), 5), 5)
+        price_key_conversion_dictionary = {key: jewel_price(value) if self.transaction_currency == "jewel" else klay_price(value) for key, value in zip(self.form.mats_keys, self._mats_prices_dict.keys())} 
+        price_key_conversion_dictionary.update({"jewel": 1 if self.transaction_currency == "jewel" else self._mats_prices_dict.get("klay").get("price_native")})
 
-
-    def _get_profits_dictionary(self):
-        profits_keys = self.form.keys()
-
-        return (tuple(profits_keys), tuple(self._mats_price_object.keys()))
-
-
+        return price_key_conversion_dictionary 
 
     
+    def _total_profits(self):
+        unwanted_keys = ("gold_egg", "klay")
+        total_profit_dictionary = {key: round(float(self.price_dictionary.get(key)) * eval(f"self.form.{key}.data"), 5) for key in self.form.mats_keys if key not in unwanted_keys}
+        total_profit_dictionary.update({"jewel": float(self.price_dictionary.get("jewel")) * self.form.jewel.data})
+        total_profit_dictionary.update({"materials_total": round(sum(total_profit_dictionary.values()), 5)})
 
+        return total_profit_dictionary 
+
+    
+    def display_dict_map(self, item_list):
+
+        def display_dict(item):
+            image_source = f"../static/images/{item}.png"
+            item_quantity = eval(f"self.form.{item}.data")
+            item_price = self.price_dictionary.get(item)
+            item_profit = self.total_mats_profit.get(item)
+
+            return {"image_source": image_source, "item_quantity": item_quantity, "item_price": item_price, "item_profit": item_profit}
+        
+        return map(display_dict, item_list)

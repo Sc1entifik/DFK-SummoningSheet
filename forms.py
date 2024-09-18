@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import (StringField, TextAreaField, IntegerField, BooleanField, RadioField)
+from wtforms import (StringField, TextAreaField, IntegerField, FloatField, RadioField)
 from wtforms.validators import InputRequired
 
 
@@ -12,14 +12,14 @@ class HeroInputForm(FlaskForm):
 
 
 class MatsInputForm(FlaskForm):
+    mats_keys = ("bloater","ironscale","lantern_eye","redgill","silverfin","shimmerskin","sailfish","frost_bloater","speckle_tail","three_eyed_eel","king_pincer","ragweed","rockroot","redleaf","darkweed","ambertaffy","goldvein","swift_thistle","frost_drum","knaproot","shaggy_cap","skunkshade","bluestem","spiderfruit","milkweed","shvas_rune","moksha_rune","might_crystal","swiftness_crystal","fortitude_crystal","insight_crystal","finesse_crystal","vigor_crystal","wit_crystal","fortune_crystal","tears","blue_egg","grey_egg","green_egg","yellow_egg","gold_egg","gold","klay","crystal")
     kingdom = RadioField("Kingdom ", choices=["Serendale", "Crystalvale"], validators=[InputRequired()])
-    transaction_cost = IntegerField("Klay/Jewel", default=0) 
-    crystal = IntegerField("Crystal ", default=0)
-    jewel = IntegerField("Jewel ", default=0)
+    transaction_cost = FloatField("Klay/Jewel", default=0) 
+    crystal = FloatField("Crystal ", default=0)
+    jewel = FloatField("Jewel ", default=0)
     tears = IntegerField("Tears ", default=0)
-    shvas_runes = IntegerField("Shvas Rune ", default=0)
-    moksha_runes = IntegerField("Moksha Rune ", default=0)
-    yellow_egg = IntegerField("Yellow Egg ", default=0)
+    shvas_rune = IntegerField("Shvas Rune ", default=0)
+    moksha_rune = IntegerField("Moksha Rune ", default=0)
     blue_egg = IntegerField("Blue Egg ", default=0)
     grey_egg = IntegerField("Grey Egg ", default=0)
     green_egg = IntegerField("Green Egg ", default=0)
@@ -50,12 +50,12 @@ class MatsInputForm(FlaskForm):
     bluestem = IntegerField("Bluestem ", default=0)
     spiderfruit = IntegerField("Spiderfruit ", default=0)
     milkweed = IntegerField("Milkweed ", default=0)
-    might_stone = IntegerField("Might Stone ", default=0)
-    swiftness_stone = IntegerField("Swiftness Stone ", default=0)
-    fortitude_stone = IntegerField("Fortitude Stone ", default=0)
-    insight_stone = IntegerField("Insight Stone ", default=0)
-    finesse_stone = IntegerField("Finesse Stone ", default=0)
-    vigor_stone = IntegerField("Vigor Stone ", default=0)
-    wit_stone = IntegerField("Wit Stone ", default=0)
-    fortune_stone = IntegerField("Fortune Stone ", default=0)
+    might_crystal = IntegerField("Might Crystal ", default=0)
+    swiftness_crystal = IntegerField("Swiftness Crystal ", default=0)
+    fortitude_crystal = IntegerField("Fortitude Crystal ", default=0)
+    insight_crystal = IntegerField("Insight Crystal ", default=0)
+    finesse_crystal = IntegerField("Finesse Crystal ", default=0)
+    vigor_crystal = IntegerField("Vigor Crystal ", default=0)
+    wit_crystal = IntegerField("Wit Crystal ", default=0)
+    fortune_crystal = IntegerField("Fortune Crystal ", default=0)
 
