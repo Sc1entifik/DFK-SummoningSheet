@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block content %}
+<html>
+
+	<head>
+		<title>DFK Summoner Sheet Instructions</title>
+		<link rel="stylesheet" href='{{ url_for("static", filename="css/summoning_sheet_instructions.css") }}' />
+		<link rel="stylesheet" href='{{ url_for("static", filename="css/media_summoning_sheet_instructions.css") }}' />
+	</head>
+
+	<body>
+		<div class="instructions">
+			<h1>Summoner Sheet Tutorial</h1>
+			<p>DFK Summoner Sheet is a tool for use with the Defi Kingdomgs crypto game <a href="https://defikingdoms.com" target="_blank" rel="noopener noreferrer">https://defikingdoms.com.</a></p>
+
+			<div class="about">
+				<h2>About Summoner Sheet</h2>
+				<p>This tool allows you to compare important stats of multiple summoning candidates at once paired with a hero of your choosing. The relevant stats you want to look at are always in the same place because the stats that get shown are the optimal stats for the class and profession of the single hero you pair with the list.</p>
+			</div>
+
+			<div class="how-to">
+				<h2>How To Use</h2>
+				<p>The first thing we need to do is determine which realm our hero belongs to. This is determined by the little symbol on the bottom of your hero card.</p>
+
+				<div class="realm-heroes">
+					<figure class="hero">
+						<img src="{{ url_for("static", filename="images/crystalvale_pirate.png") }}" name="crystalvale-hero" />
+						<figcaption for="crystalvale-hero">Crystalvale Hero</figcaption>
+					</figure>
+
+					<figure class="hero">
+						<img src="{{ url_for("static", filename="images/serendale_monk.png") }}" name="serendale-hero" />
+						<figcaption for="serendale-hero">Original Serendale Hero</figcaption>
+					</figure>
+
+					<figure class="hero">
+						<img src="{{ url_for("static", filename="images/serendale_2_paladin.png") }}" name="serendale-2-hero" />
+						<figcaption for="serendale-2-hero">Klaytn Serendale Hero</figcaption>
+					</figure>
+				</div>
+
+				<p>Next you need to get the hero number which is also on the bottom of the card directly to the right of the realm symbol.</p>
+				<p>For the remainder of the tutorial we will try to find a good summon for our pirate Ageris Youngstalker.</p>
+				<br>
+				<br>
+
+				<h3>Looking At Our Card</h3>
+				<p>There are some important stats to talk about on the front and back of our card.</p>
+				<div class="realm-heroes">
+						<figure class="hero">
+							<img src="{{ url_for("static", filename="images/ageris_front.png") }}"/>
+							<figcaption>Card Front</figcaption>
+						</figure>
+
+						<figure class="hero">
+							<img src="{{ url_for("static", filename="images/ageris_back.png") }}"/>
+							<figcaption>Card Back</figcaption>
+						</figure>
+				</div>
+				<p>The front of the card has the class, generation, and remaining summons circled while the back of the card has the blue stat and profession circled in that order from top to bottom on each side.</p>
+				
+				<h4 class="tutorial-small-header">Stats Breakdown</h4>
+				<ul class="stats-description">
+					<li><p>CLASS - This will determine the class of the second hero we need to pair with in order to have a chance of a class mutation. In this case we will need to summon our Pirate with a Monk to try to get a Ninja class mutation.</p></li>
+					<li><p>GENERATION - The generation of a hero will determine the summoning cost to perform a summon. The higher the generation the higher the price to perform a summon using that hero. The hero you get after performing a summon will always have 1 plus the highest generation of the heroes that were used to summon it. This is why you want to try to perform a summon using heroes with matching generations.</p></li>
+					<li><p>REMAINING SUMMONS - This is the number of summons that a hero has left before they can no longer summon. The hero you get after performing a summon will almost always have 1 minus the lowest number of remaining summons of the two heroes that were used to summon it. It is even more important to match remaining summons than it is to match generation IMO.</p></li>
+					<li><p>BLUE STAT - The blue stat gives higher odds of rolling a stat boost on that stat on every level up. If the blue stat is also the hero's green stat then it will be a purple stat instead which is even better. It is important to have a blue stat that increases the performance of the profession of the hero. The blue/purple stat will also boost the Level 1 Quest performance for that stat with this in particular being greatly boosted with a purple stat.</p></li>
+					<li><p>PROFESSION - The profession of the hero gives the hero a stamina discount when the hero attempts that profession. This means it only makes sense to use that hero for that profession even if that hero's class is better suited for another profession. Therefore when performing a summon you want the resulting hero to inherit the best profession for it's class and the best blue stat for that class. Each profession has two stats that help make up the performance of a hero doing that profession. Each class has different growth rates for the 8 stats meaning that each class will have a profession it performs better than the rest. In our case we are taking our Pirate and pairing it with a Monk to try to get a Ninja that has blue/purple LCK stat.</p></li>
+				</ul>
+
+				<div class="about">
+				<h3>Breaking It All Down</h3>
+					<p>I know I just threw a lot at you so I am going to break it all down using our example. We have a PIRATE that is GEN 3 with 6 REMAINING SUMMONS that has BLUE LCK and FISHING PROFESSION. We are trying to get a FISHING PROFESSION NINJA with BLUE/PURPLE LCK out of the summon. Ninja is the best class for the fishing profession in the game having the best growth odds for both AGI and LCK stats which are the active stats for fishing. To do this we want to find the best MONK that is GEN 3 with 6 REMAINING SUMMONS that has BLUE/PURPLE LCK and the FISHING PROFESSION.</p>
+					<br>
+					<p>Checking our PIRATE against all MONKS that fit these criteria will reveal to us the best MONK to pair with. We can't change the odds of getting the correct class all that much no matter which MONK we choose however we can maximize the odds of getting a resulting summon that has FISHING and BLUE/PURPLE LCK.</p>
+				</div>
+
+				<h3>Filling Out The Form</h3>
+				<p>Now that we know what we want to get from our summon it's time to start filling out the webform.</p>
+
+				<figure class="webform">
+					<img src="{{ url_for("static", filename="images/your_hero_data_form.png") }}"/>
+					<figcaption>Form With Our Hero Filled In (Hover or tap to enlarge)</figcaption>
+				</figure>
+				<p>As you can see from the above picture our form allows us to enter in just our Hero number or our Hero number separated by a comma followed by the summoning cost for that hero. The second way allows you to compare the costs of the summon if you wish. For the simplicity of this tutorial we are going to use the first method.</p>
+
+				<h4 class="tutorial-small-header">Using The Filters</h4>
+				<p>The best way to find Monks that fit our criteria is to filter search for them using the awesome Defi Kingdoms search filter provided by the game.</p>
+				<p>To find Monks we own that fit our criteria go to the map page of the game to the left side of the screen click the Heroes icon and this will open up a search filter page that looks like the following.</p>
+				<figure class="webform">
+					<img src="{{ url_for("static", filename="images/dfk_heroes_filter.png") }}"/>
+					<figcaption>Filtered Results For Serendale 1 Monks (Hover or tap to enlarge)</figcaption>
+				</figure>
+				<p>Under the basics tab we filtered for CLASS: Monk, ORIGIN REALM: Serendale 1.0, SUMMONS REMAINING: 6 Generation: 3</p>
+				<p>Under the attributes tab we filtered for GATHERING PROFESSION: Fishing, STAT GROWTH BONUS: LCK</p>
+				<br>
+				<div class="about">
+					<p>Because we filtered for ORIGIN REALM we can enter every hero number we see in the Serendale list of our webform. Repeat this step filtering for the other realms.</p>
+					<p>Now go to the Portal section of the map and talk to the Arch Druid. This will bring up a menu where we will click Hire a Hero which in turn will bring up another hero filter page. This page will be filled with heroes that we can hire for a summon. Use the filter just like we did for the heroes we own. Once we have all the heroes entered in all the lists of the webform we are ready to create our summoner sheet!</p>
+					<p>You can even go to the tavern and shop for Monks that fit these criteria using the same filtering process if you wish. In this tutorial however we only are looking at Monks I own and that we can rent for hire for the summon.</p>
+				</div>
+				<br>
+				<p>SUMMONING TIP: When hiring somone else's hero we can filter for SUMMONS REMAINING >= 6 and GENERATION <= 3 since we aren't worried about the efficiency of their summons used.</p>
+				<h3>Evaluating Our Results</h3>
+				<p>Below is our completed form along with our results page </p>
+				<div class="final-results">
+					<figure class="webform">
+						<img src="{{ url_for("static", filename="images/completed_webform.png") }}" />
+						<figcaption>Completed Webform (Hover or tap to enlarge)</figcaption>
+					</figure>
+					
+					<figure class="webform">
+						<img src="{{ url_for("static", filename="images/results_page.png") }}" />
+						<figcaption>Your Summoner Sheet! (Hover or tap to enlarge)</figcaption>
+					</figure>
+				</div>
+				<div class="about">
+					<p>When we compare the results returned on our summoner sheet you can see that the first candidate #241654 has a few things going for it when compared to the other candidates. First it has the highest odds of returning the Fishing Profession. It also had the highest odds of producing a blue luck stat being %10 better than the other heroes in that category. It has 3% better odds of producing a Ninja than most of the heroes. Finally it has one of the lower lemon percentages. This is more of a tie breaker kind of stat but it is also in our favor making this hero clearly better than the other heroes on stats.</p>
+					<br>
+					<p>Lemon % - Odds of producing a hero that is not in the Wanted Class odds or Opposing Mutation Class Odds. In most cases a hero you want to liquidate to reduce loss from producing.<p>
+					<p>Opposing Mutation Class Odds - The classes of hero that will produce a hero of the mutation class needed to pair with the mutation class of our hero to get the next level of mutation. For example our mutation class is NINJA. If you pair a NINJA with a SUMMONER you can get a SAGE mutation. We will eventually need a SUMMONER with Blue LCK and FISHING PROFESSION to pair with our NINJA if we get one to go for a SAGE with these attributes. This makes getting one of these three classes not as bad as spiking a Lemon class. Hero prices fluctuate greatly so you may want to keep one or two of these heroes around for this reason alone. When you need a SUMMONER with Blue LCK and FISHING PROFESSION they may expensive or hard to come by. Otherwise you can just buy or rent one when the need arrives.</p> 
+				</div>
+				<br>
+				<p>SUMMONING TIP: Opposing Mutation Class heroes can make good candidates for a Dark Summon after all their summons are used up.</p> 
+				<br>
+				<div class="about">
+				<p>This concludes the Summoner Sheet Tutorial. If you ever are confused about what class of hero you need to pair with another in order to get a mutation or what hero you need once you get a mutation to keep trying to go up the mutation tree you can always fill out the Summoner Sheet webform for the hero in question and then just put in 1 in the Serendale Candidates and then click Create Summoner Sheet or press the enter key. This will produce a sheet where you can see the Wanted Classes and the Oppposing Mutation Classes for that given hero class.</p>
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>
+{% endblock %}
+

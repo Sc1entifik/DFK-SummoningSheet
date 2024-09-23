@@ -20,13 +20,13 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/hero_form/", methods=["GET", "POST"])
+@app.route("/heroform/", methods=["GET", "POST"])
 def hero_form():
     form = HeroInputForm()
     return render_template("hero_form.html", form=form)
 
 
-@app.route("/mats_form/", methods=["GET", "POST"])
+@app.route("/matsform/", methods=["GET", "POST"])
 def mats_form():
     form = MatsInputForm()
 
@@ -45,9 +45,12 @@ def mats_form():
     return render_template("mats_form.html", form=form)
 
 
-@app.route("/about/")
+@app.route("/aboutsummonsheet/")
 def about():
-    return render_template("about.html")
+    return render_template("about_summon_sheet.html")
+
+
+@app.route("/about_mats_profitability_tool")
 
 
 @app.errorhandler(Exception)

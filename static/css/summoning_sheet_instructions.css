@@ -1,0 +1,72 @@
+.instructions p {
+	color: hsl(270, 87%, 88%);/*Text Purple*/
+	text-align: center;
+	line-height: 2.5ch;
+}
+
+.instructions a {
+	color: hsl(116, 87%, 87%);
+}
+
+.about p {
+	text-align: left;
+}
+
+.about h4 {
+	color: hsl(270, 87%, 87%);
+	text-align: center;
+}
+
+.realm-heroes {
+	display: flex;
+	justify-content: space-around;
+}
+
+figure.hero {
+	display: flex;
+	flex-direction: column;
+	color: hsl(60, 87%, 87%);
+	font-size: 16px;
+}
+
+/* image naturally is 315px wide and 450px high */
+figure.hero img {
+	width: 20em;
+	height: 28em;
+}
+
+.tutorial-small-header {
+	color: hsl(270, 87%, 87%);
+	text-align: center;
+}
+
+.stats-description {
+	list-style-type: none;
+	text-align: left;
+}
+
+.stats-description p {
+	text-align: left;
+}
+
+.final-results {
+	display: flex;
+	justify-content: center;
+}
+
+
+figure.webform img {
+	width: 20rem;
+	height: 17rem;
+	border: 1px dotted hsl(60, 87%, 87%);
+	transition: .7s;
+}
+
+figure.webform img:hover {
+	transform: scale(3.5);
+}
+
+figure {
+	color: hsl(60, 87%, 87%);
+	text-align: center;
+}

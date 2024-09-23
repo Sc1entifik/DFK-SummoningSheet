@@ -1,0 +1,41 @@
+@media screen and (max-width: 1200px) {
+	figure.hero {
+		font-size: 12px;
+	}
+}
+
+@media screen and (max-width: 970px) {
+	figure.hero {
+		font-size: 10px;
+	}
+}
+
+@media screen and (max-width: 870px) {
+	figure.hero {
+		font-size: 8px;
+	}
+}
+
+@media screen and (max-width: 760px) {
+	.realm-heroes {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	figure.hero {
+		font-size: 6px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.final-results {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	figure.webform img:hover {
+		transform: scale(2);
+	}
+}
+
+

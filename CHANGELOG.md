@@ -133,8 +133,10 @@ v-1.952
 - Minor tweaks to mining_results.html and mining_results.css including p tag color change.
 
 
+v-2.0
+- Created instructions page for Summoner Sheet portion of website.
+
 Things I'm working on for future updates / pseudo coding:
 - Build the instructions page for the material mining profitability tool.
-- Revamp front end for better styling and visibility.
 - Fix bug where whitespace is not trimmed from entry forms.
 - Writing some tests so project remains scalable.
