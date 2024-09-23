@@ -26,7 +26,7 @@ def hero_form():
     return render_template("hero_form.html", form=form)
 
 
-@app.route("/mats_form/", methods=["GET", "POST"])
+@app.route("/matsform/", methods=["GET", "POST"])
 def mats_form():
     form = MatsInputForm()
 
