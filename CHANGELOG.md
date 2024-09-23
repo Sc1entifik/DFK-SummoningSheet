@@ -136,6 +136,9 @@ v-1.952
 v-2.0
 - Created instructions page for Summoner Sheet portion of website.
 
+v-2.0.0.1 
+- Fixed bug with route name change which caused mats results not to load.
+
 Things I'm working on for future updates / pseudo coding:
 - Build the instructions page for the material mining profitability tool.
 - Fix bug where whitespace is not trimmed from entry forms.

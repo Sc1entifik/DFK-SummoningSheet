@@ -26,7 +26,7 @@ def hero_form():
     return render_template("hero_form.html", form=form)
 
 
-@app.route("/matsform/", methods=["GET", "POST"])
+@app.route("/mats_form/", methods=["GET", "POST"])
 def mats_form():
     form = MatsInputForm()
 
@@ -38,8 +38,8 @@ def mats_form():
 
 
         mining_results_controller = MatsController(form, mats_price_object.dexscreener_dfk_mats_dictionary)
-        return render_template("mining_results.html", controller=mining_results_controller)
 
+        return render_template("mining_results.html", controller=mining_results_controller)
 
 
     return render_template("mats_form.html", form=form)
