@@ -55,7 +55,7 @@ def about():
 
 @app.errorhandler(Exception)
 def failure_form(e):
-    return render_template("failure.html")
+    return render_template("failure.html", error=e)
 
 
 if __name__ == "__main__":

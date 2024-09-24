@@ -23,3 +23,9 @@
 	height: 1rem; 
 	width: 100%;
 }
+
+.error-message {
+	text-align: center;
+	color: hsl(60, 87%, 87%); /*White Gold*/
+	font-size: 2rem;
+}

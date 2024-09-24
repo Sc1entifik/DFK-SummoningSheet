@@ -139,6 +139,9 @@ v-2.0
 v-2.0.0.1 
 - Fixed bug with route name change which caused mats results not to load.
 
+v-2.0.0.2
+- Put error message on failure form for easier troubleshooting.
+
 Things I'm working on for future updates / pseudo coding:
 - Build the instructions page for the material mining profitability tool.
 - Fix bug where whitespace is not trimmed from entry forms.
