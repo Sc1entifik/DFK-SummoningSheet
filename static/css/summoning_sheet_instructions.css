@@ -63,7 +63,7 @@ figure.webform img {
 }
 
 figure.webform img:hover {
-	transform: scale(3.5);
+	transform: scale(3);
 }
 
 figure {

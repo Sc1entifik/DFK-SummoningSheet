@@ -1,0 +1,35 @@
+@media screen and (max-width: 953px) {
+	.screenshot-box {
+		font-size: 12px;
+	}
+}
+
+@media screen and (max-width: 840px) {
+	.screenshot-box {
+		font-size: 10px;
+	}
+}
+
+@media screen and (max-width: 740px) {
+	.screenshot-box {
+		font-size: 8px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.screenshot-box {
+		font-size: 6px;
+	}
+}
+
+@media screen and (max-width: 470px) {
+	.screenshot-box {
+		font-size: 4px;
+	}
+}
+
+@media screen and (max-width: 360px) {
+	.screenshot-box {
+		font-size: 3px;
+	}
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block content %}
+<html>
+
+	<head>
+		<title>DFK Materials Mining Profitability Tool</title>
+		<link rel="stylesheet" href='{{ url_for("static", filename="css/mats_mining_instructions.css") }}' />
+		<link rel="stylesheet" href='{{ url_for("static", filename="css/media_mats_mining_instructions.css") }}'/>
+	</head>
+
+	<body>
+		<h1>Material Mining Profitability Tool Tutorial</h1>
+		<div class="instructions">
+			<p>DFK Material Mining Profitability Tool is for use with the Defi Kingdoms crypto game <a href="https://defikingdoms.com" target="_blank" rel="noopener noreferrer">https://defikingdoms.com</a></p>
+			<p>This tool was made possible with the help of the Dexscreener API.</p>
+			<p><b>* I AM NOT A FINANCIAL ADVISOR AND NONE OF THIS IS FINANCIAL ADVICE *</b></p>
+
+			<div class="subsection-flexbox">
+				<h2>About Profitability Tool</h2>
+				<p>The tool allows you to quickly see if your heroes are questing at a profit or a loss relative to the transaction costs questing requires.</p>
+				<p>The profitability of resource mining quests in Defi Kingdoms is something that is difficult and tedious to do with napkin math despite the formula being quite simple. Profit = Value Of Materials In Transaction Currency - Transaction Cost.</p>
+				<p>Some of the difficulties that make this impractical without the help of a tool are the following:</p>
+				<ol>
+					<li>Over forty mineable materials with fluctuating values to look up in the marketplace.</li>
+					<li>Varying slippage rates making it difficult to see a "fair" price on certain items.</li>
+					<li>Variance of your Heroes' quest performance on every quest attempt.</li>
+					<li>Variance of transaction costs due to blockchain congestion and other factors.</li>
+					<li>Needing to record many samples to get a feel about what an average return for your heroes really looks like.</li>
+				</ol>
+				<h3>A Common Misconception</h3>
+				<p>Some of you may be thinking that I forgot to mention the fluctuating prices of Jewel or Klay the transaction currencies of the kingdoms as a difficulty in determining questing profitability. I did not mention this as a factor because the variance in Jewel or Klay has nothing to do with the profitability of resource mining as all costs relative to resource mining are paid in Jewel or Klay. For example lets say you paid 4 Jewel to quest and your heroes returned 6 Jewel worth of items your profit is 2 Jewel regardless of the price of Jewel relative to anything else.</p>
+			</div>
+
+			<div class="subsection-flexbox">
+				<h2>How To Use</h2>
+				<p>The reason we write down Jewel/Klay amounts before and after transactions in the following steps is because the transaction costs you agree to when signing your transactions are only the maximum you could pay for that transaction and not what you were actually charged.</p>
+				<ol>
+					<li>Wait until all your heroes are ready to quest at once.</li>
+					<li>Queue all your heroes to quest and then write down the total Jewel/Klay you currently have.</li>
+					<li>Execute the quest queue and then subract the total Jewel/Klay you have now from what you wrote down in Step 2. This will be your start quest cost.
+					<li>Wait until all your heroes are done questing even your Miners and Gardeners.
+					<li>Write down the amount of Jewel/Klay you currently have. 
+					<li>Execute the Active Quests queue then subtract the amount of Jewel/Klay you have now from what you wrote down in Step 5. This will be your complete quest cost.
+					<li>Add your start quest cost to your complete quest cost. This will be your total quest cost.</li>
+					<li>Open up a Mats Mining Form Screen and select the Kindom you are mining in along with the total quest cost.</li>
+					<li>Enter all the mats in you got from questing in the form and then click submit.</li>
+				</ol>
+				<div class="screenshot-box">
+					<figure>
+						<img src="{{ url_for("static", filename="images/mats_mining_jewel_circled.png") }}"/>
+						<figcaption>Total Jewel Circled Top Left</figcaption>
+					</figure>
+					
+					<figure>
+						<img src="{{ url_for("static", filename="images/rewards_page.png") }}" />
+						<figcaption>Total Mats Mined</figcaption>
+					</figure>
+				</div>
+
+				<div class="screenshot-box">
+					<figure>
+						<img class="dotted-border" src="{{ url_for("static", filename="images/material_profitability_form.png") }}" />
+						<figcaption>Form Filled Out With Costs And Mats</figcaption>
+					</figure>
+
+					<figure>
+						<img class="dotted-border" src="{{ url_for("static", filename="images/profitability_results.png") }}" />
+						<figcaption>Mining Profitability Report</figcaption>
+					</figure>
+				</div>
+				<p>This concludes the tutorial for the mining profitability tool. As you can see this quest was a success. There were mainly mediocre materials mined yet the mats were worth more than the transaction costs. That is a good sign my heroes are profitable. I should run this experiment a few more times however to make sure. I'll leave you with some things I do that I feel help me.</p>
+				
+				<ul>
+					<li><b>Get rid of lemons -</b> I find my bad heroes are a drag on my bottom line and eat up Shvas Runes to level up. When I find myself not leveling up a hero because it doesn't seem worth it I consider selling it or throwing it towards a Dark Summon.</li>
+					<li><b>Craft stones on advanced class plus summons -</b> Advanced class and beyond heroes have way superior stats compared to their basic class counterparts. Every time I perform a summon and I expect the resulting hero to be an Advanced or Elite class I craft a summoning stone to pop the relevant stat I want boosted. A hero that used a summon stone for a stat will over time have a way higher stat relative to a similar hero where no stone was used.</li>
+					<li><b>Utilize the LPs -</b> I put most of my unused mats into LPs that would otherwise just be sitting around that aren't going towards crafting other materials and the like. This is a complicated topic and comes at the risk of impermanent loss but I feel it is worth it for me. I normally pair the mat I want to LP with Jewel by swapping half the amount of the mat I want to LP for Jewel and then throw them together into the LP. This way whenever I want to pull the LP because I need some more of the mat for crafting materials or the like I also get a boost in gas and need to swap mats for gas less often.</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
+{% endblock %}

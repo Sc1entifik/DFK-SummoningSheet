@@ -1,0 +1,50 @@
+.instructions p {
+	color: hsl(270, 87%, 88%); /*Text Purple*/
+	text-align: center;
+	line-height: 2.5ch;
+	font-size: 1.4rem;
+}
+
+.instructions h4 {
+	color: hsl(279, 87%, 88%); /*Text Purple*/
+}
+
+.subsection-flexbox p {
+	text-align: left;
+}
+
+.instructions a {
+	color: hsl(116, 87%, 87%);
+}
+
+.subsection-flexbox {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: hsl(270, 87%, 88%); /*Text Purple*/
+	line-height: 2.5ch;
+	font-size: 1.4rem;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.subsection-flexbox img {
+	width: 30em;
+	height: 20em;
+	transition: .7s;
+}
+
+.subsection-flexbox img:hover {
+	transform: scale(3);
+
+}
+
+.dotted-border {
+	border: 1px dotted hsl(60, 87%, 87%)/*White Gold*/;
+}
+
+.screenshot-box {
+	display: flex;
+	justify-content: space-evenly;
+	font-size: 14px;
+}

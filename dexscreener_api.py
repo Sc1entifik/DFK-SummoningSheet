@@ -3,7 +3,7 @@ import json
 from datetime import datetime, timedelta
 
 class DexscreenerStaticValues:
-    DEXSCREENER_DATABASE_FILEPATH = "dexscreener_dfk_mats_prices.json"
+    DEXSCREENER_DATABASE_FILEPATH = "dexscreener_dfk_mats_prices.json" #on production server set to "../../home/Scientifik/DFK-SummoningSheet/dexscreener_dfk_mats_prices.json"
     CHAIN_ID = "avalanchedfk"
     DATABASE_DATETIME_FORMAT = "%Y/%m/%d %H:%M"
     ITEM_QUERY_ENDPOINT = "https://api.dexscreener.com/latest/dex/search?q="

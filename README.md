@@ -13,3 +13,6 @@ Files included in this project include but are not limited to.
 - A templates folder holding Jinja templates for front end rendering.
 - Module files which app.py rely on to get and create data for rendering.
 - An app.py file which is responsible for the routing of GET and POST requests as well as rendering the front end content.
+
+## On Production Server
+- Change the relative path of the descreener_dfk_mats_prices.json file in dexscreener_api.py to the path of the wgsi.py file. This is the only variable which needs to be changed manually so I avoided making environment variables just to handle this.

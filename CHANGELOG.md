@@ -136,11 +136,17 @@ v-1.952
 v-2.0
 - Created instructions page for Summoner Sheet portion of website.
 
-v-2.0.0.1 
+v-2.001 
 - Fixed bug with route name change which caused mats results not to load.
 
-v-2.0.0.2
+v-2.002
 - Put error message on failure form for easier troubleshooting.
+
+v-2.1
+- Finished material mining instructions page.
+- Removed pictures that were no longer used.
+- Added reminder in README.md to set database location on production server.
+
 
 Things I'm working on for future updates / pseudo coding:
 - Build the instructions page for the material mining profitability tool.

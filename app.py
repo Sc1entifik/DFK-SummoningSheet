@@ -46,11 +46,13 @@ def mats_form():
 
 
 @app.route("/aboutsummonsheet/")
-def about():
+def about_summoner_sheet():
     return render_template("about_summon_sheet.html")
 
 
 @app.route("/about_mats_profitability_tool")
+def about_mats_mining_profitability_tool():
+    return render_template("about_mining_tool.html")
 
 
 @app.errorhandler(Exception)
