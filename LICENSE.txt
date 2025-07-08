@@ -1,0 +1,9 @@
+Copyright © 2022–present Dustin Rosenberry
+
+All rights reserved.
+
+This project and its contents are the intellectual property of Dustin Rosenberry.
+
+You may view and study the code for personal, educational, and interview purposes only.
+
+Reproduction, modification, distribution, or public display of this code or any part of it without explicit written permission from Dustin Rosenberry is strictly prohibited.
