@@ -24,7 +24,9 @@ In order to use either of these projects comprehensively first get a feel for pl
 ## Contributing
 These projects are highly opinionated and as a result I am not accepting PRs of any type. You are free to send any bug reports you have to [fullstackswe@drosenberry.dev](mailto:fullstackswe@drosenberry.dev) however. 
 
-You are also free to clone the repo and play with the project locally the following are the instructions for that.
+
+## Running Locally
+You are free to clone the repo and play with the project locally. The following are instructions for that.
 
 ### Clone The Repo
 Fork the repo at https://github.com/Sc1entifik/DFK-SummoningSheet.git
