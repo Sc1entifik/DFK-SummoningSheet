@@ -1,5 +1,5 @@
 # DFK-Summoning Sheet And DFK-Mining Profitability Tool
-This project contains the DFK-Summoning Sheet and DFK-Mining Profitability Tool in one website at [https://scientifik.pythonanywhere.com/](https://scientifik.pythonanywhere.com/) since they go together like peanut butter and jelly. These are tools to be used with the [Defi Kingdoms web3 crypto game.](https://defikingdoms.com/)
+This project contains the DFK-Summoning Sheet and DFK-Mining Profitability Tool in one website at [https://scientifik.pythonanywhere.com/](https://scientifik.pythonanywhere.com/) since they go together like peanut butter and jelly. These are tools to be used with the [Defi Kingdoms web3 crypto game.](https://defikingdoms.com/) This is a Python Flask website.
 
 ## Motivation
 ### DFK-Summoning Sheet 
@@ -20,14 +20,32 @@ To get a sample material mining profit analysis take the inputs provided in mats
 ## Usage
 In order to use either of these projects comprehensively first get a feel for playing the game at [https://defikingdoms.com/.](https://defikingdoms.com) and then follow the tutorials at [https://scientifik.pythonanywhere.com/.](https://scientifik.pythonanywhere.com)
 
-## Included Files
-Files included in this project include but are not limited to.
 
-- This README.md file
-- A CHANGELOG.md file showing version control history and upgrades I plan on making.
-- A templates folder holding Jinja templates for front end rendering.
-- Module files which app.py rely on to get and create data for rendering.
-- An app.py file which is responsible for the routing of GET and POST requests as well as rendering the front end content.
+## Contributing
+These projects are highly opinionated and as a result I am not accepting PRs of any type. You are free to send any bug reports you have to [fullstackswe@drosenberry.dev](mailto:fullstackswe@drosenberry.dev) however. 
+
+You are also free to clone the repo and play with the project locally the following are the instructions for that.
+
+### Clone The Repo
+Fork the repo at https://github.com/Sc1entifik/DFK-SummoningSheet.git
+git clone your forked repo
+
+### Set Up A Venv 
+In the root of the cloned fork run `python -m venv venv` to create a virtual environment
+
+### Activate Your Venv And Install Requirements.txt
+Now that you created a python virtual environment run `source venv/bin/activate` to activate your virtual environment.
+Once your virtual environment is activated run `pip install -r requirements.txt`
+
+### Create a .env file
+There is a template environment variable file called environment_template.txt. Copy this file as .env by running `cp environment_template.txt .env` 
+
+### Fill Out Your .env File
+run `python generate_secret_key.py` this will print out a random secret key. Copy this key and then paste it in SECRET_KEY in your .env file.
+Fill out ENVIRONMENT_TYPE=development.
+
+### Run The Site
+Make sure you are still in your virtual environment and then run `python app.py`. You should then be able to access the site locally from your browser with localhost:5000. If you want to use it from another computer on your network check out the address provided at the terminal acting as the local dev server. It should tell you the local socket address to use.
 
 ## On Production Server
 - Change the relative path of the descreener_dfk_mats_prices.json file in dexscreener_api.py to the path of the wgsi.py file. This is the only variable which needs to be changed manually so I avoided making environment variables just to handle this.
