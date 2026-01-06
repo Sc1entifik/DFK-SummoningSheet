@@ -1,0 +1,28 @@
+Kingdom and Cost:
+Crystalvale:
+.19 Jewel
+
+Currencies:
+Gold: 2500
+
+Artifacts:
+Shvas Rune: 5
+Tears: 30
+
+Fish:
+Frost Bloater: 39
+Ironscale: 13
+Lantern-Eye: 13
+Speckle Tail: 9
+King Pincer: 2
+Shimmerskin: 2
+Three-Eyed Eel: 2
+
+Plants:
+Frost Drum: 28
+Rockroot: 14
+Knaproot: 13
+Darkweed: 9
+Shaggy Cap: 4
+Ambertaffy: 3
+Skunkshade: 3

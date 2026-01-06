@@ -146,9 +146,3 @@ v-2.1
 - Finished material mining instructions page.
 - Removed pictures that were no longer used.
 - Added reminder in README.md to set database location on production server.
-
-
-Things I'm working on for future updates / pseudo coding:
-- Build the instructions page for the material mining profitability tool.
-- Fix bug where whitespace is not trimmed from entry forms.
-- Writing some tests so project remains scalable.
