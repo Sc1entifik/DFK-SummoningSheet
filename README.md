@@ -1,5 +1,6 @@
 # DFK-Summoning Sheet And DFK-Mining Profitability Tool
-This project contains the DFK-Summoning Sheet and DFK-Mining Profitability Tool in one website at [https://scientifik.pythonanywhere.com/](https://scientifik.pythonanywhere.com/) since they go together like peanut butter and jelly. These are tools to be used with the [Defi Kingdoms web3 crypto game.](https://defikingdoms.com/) This is a Python Flask website.
+This project contains the DFK-Summoning Sheet and DFK-Mining Profitability Tool in one website at [https://scientifik.pythonanywhere.com/](https://scientifik.pythonanywhere.com/) since they go together like peanut butter and jelly. These are tools to be used with the [Defi Kingdoms web3 crypto game.](https://defikingdoms.com/) 
+This is a Python Flask website.
 
 ## Motivation
 ### DFK-Summoning Sheet 
@@ -29,8 +30,7 @@ These projects are highly opinionated and as a result I am not accepting PRs of 
 You are free to clone the repo and play with the project locally. The following are instructions for that.
 
 ### Clone The Repo
-Fork the repo at https://github.com/Sc1entifik/DFK-SummoningSheet.git
-git clone your forked repo
+Fork the repo at https://github.com/Sc1entifik/DFK-SummoningSheet.git then git clone your forked repo.
 
 ### Set Up A Venv 
 In the root of the cloned fork run `python -m venv venv` to create a virtual environment
@@ -48,6 +48,3 @@ Fill out ENVIRONMENT_TYPE=development.
 
 ### Run The Site
 Make sure you are still in your virtual environment and then run `python app.py`. You should then be able to access the site locally from your browser with localhost:5000. If you want to use it from another computer on your network check out the address provided at the terminal acting as the local dev server. It should tell you the local socket address to use.
-
-## On Production Server
-- Change the relative path of the descreener_dfk_mats_prices.json file in dexscreener_api.py to the path of the wgsi.py file. This is the only variable which needs to be changed manually so I avoided making environment variables just to handle this.
