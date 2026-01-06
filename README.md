@@ -1,6 +1,5 @@
 # DFK-Summoning Sheet And DFK-Mining Profitability Tool
-This project contains the DFK-Summoning Sheet and DFK-Mining Profitability Tool in one website at [https://scientifik.pythonanywhere.com/](https://scientifik.pythonanywhere.com/) since they go together like peanut butter and jelly. These are tools to be used with the [Defi Kingdoms web3 crypto game.](https://defikingdoms.com/) 
-This is a Python Flask website.
+This project contains the DFK-Summoning Sheet and DFK-Mining Profitability Tool in one Python Flask website at [https://scientifik.pythonanywhere.com/](https://scientifik.pythonanywhere.com/) since they go together like peanut butter and jelly. These are tools to be used with the [Defi Kingdoms web3 crypto game.](https://defikingdoms.com/) 
 
 ## Motivation
 ### DFK-Summoning Sheet 
