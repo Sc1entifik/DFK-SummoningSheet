@@ -1,9 +1,14 @@
 import requests
 import json
+from dotenv import load_dotenv
+import os
 from datetime import datetime, timedelta
 
+
+load_dotenv()
 class DexscreenerStaticValues:
-    DEXSCREENER_DATABASE_FILEPATH = "dexscreener_dfk_mats_prices.json" #on production server set to "../../home/Scientifik/DFK-SummoningSheet/dexscreener_dfk_mats_prices.json"
+    # When app is ran in production the project root is the location of the wgsi.py file
+    DEXSCREENER_DATABASE_FILEPATH = "dexscreener_dfk_mats_prices.json" if os.environ.get("ENVIRONMENT_TYPE") == "development" else "../../home/Scientifik/DFK-SummoningSheet/dexscreener_dfk_mats_prices.json"
     CHAIN_ID = "avalanchedfk"
     DATABASE_DATETIME_FORMAT = "%Y/%m/%d %H:%M"
     ITEM_QUERY_ENDPOINT = "https://api.dexscreener.com/latest/dex/search?q="

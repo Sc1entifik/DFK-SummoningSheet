@@ -1,11 +1,14 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template
+from dotenv import load_dotenv
+import os
 
 from forms import HeroInputForm, MatsInputForm
 from dexscreener_api import DexscreenerDatabaseManager
 from controller import StatsController, MatsController
 
+load_dotenv()
 app = Flask(__name__)
-app.secret_key = "ieropajdklsagnfjklghrkjlffjdklasfjkdsa;"
+app.secret_key = os.environ.get("SECRET_KEY") 
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -23,6 +26,7 @@ def index():
 @app.route("/heroform/", methods=["GET", "POST"])
 def hero_form():
     form = HeroInputForm()
+
     return render_template("hero_form.html", form=form)
 
 
@@ -40,7 +44,6 @@ def mats_form():
         mining_results_controller = MatsController(form, mats_price_object.dexscreener_dfk_mats_dictionary)
 
         return render_template("mining_results.html", controller=mining_results_controller)
-
 
     return render_template("mats_form.html", form=form)
 
